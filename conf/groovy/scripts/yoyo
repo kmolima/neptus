@@ -26,7 +26,6 @@ new Plan(console).with{
 			yoyo location:it
 			popup()
 			}
-		yoyo location: waypointYoYo, payload:[[name: "Sidescan",  Range: 50]]
 		startPoint = waypointYoYo
 		}
 	
