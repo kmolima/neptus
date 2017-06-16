@@ -47,7 +47,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -81,8 +80,6 @@ public class NVLConsolePanel extends ConsolePanel {
     private File script;
     private JButton select,execButton,stop,saveFile;
     private RTextScrollPane scroll;
-    private JTextField input;
-    private javax.swing.Popup userInput;
     public NVLConsolePanel(ConsoleLayout layout) {
         super(layout);
     }
@@ -95,7 +92,6 @@ public class NVLConsolePanel extends ConsolePanel {
         setLayout(new BorderLayout());
         editor = new RSyntaxTextArea();
         
-        input = new JTextField();
         //Custom syntax highlight
         AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory)TokenMakerFactory.getDefaultInstance();
         atmf.putMapping("text/nvl", "pt.lsts.neptus.plugins.nvl.HighlightSupport");
@@ -262,11 +258,8 @@ public class NVLConsolePanel extends ConsolePanel {
      * @return
      */
     public String askForInput(String prompt) {
-       // TODO Lançar janela de diálogo simples
-       // em que apresenta o prompt e lê uma resposta
         String result = JOptionPane.showInputDialog(this, prompt);
-        //System.out.println("User input"+result);
-       //throw new RuntimeException("Not yet implemented!");   
+ 
        return result;
     }
 
