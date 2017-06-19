@@ -50,6 +50,8 @@ public final class IMCPlanExecutor extends AbstractIMCPlanExecutor {
                     d("Got PCS message");
                     onStateUpdate((PlanControlState) message); 
                 }
+                else
+                    teardown();
     };
   
     public IMCPlanExecutor(IMCPlanTask theTask) {
