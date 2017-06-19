@@ -6,7 +6,7 @@ p = imcPlan {
 	speed 1.5, Speed.Units.METERS_PS
 	locate Location.APDL
 	move 200,0
-	goTo()
+	goTo payload:[[name:'Sidescan',Range: 50]]
 }
 
 execute v: p

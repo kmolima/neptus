@@ -65,7 +65,7 @@ public class NodeAdapter implements Node {
         imcsystem = imcData;
         for(String payload : PlanCompatibility.availablePayloads(VehiclesHolder.getVehicleById(getId()))) {
             ps.add(new PayloadComponent(payload));
-            //System.out.println("PlanCompatibility cicle: "+payload);
+            //System.out.println("PlanCompatibility Payload: "+payload+" added");
         } 
         for(CommMean com : VehiclesHolder.getVehicleById(getId()).getCommunicationMeans().values()) { //IMC | HTTP | IRIDIUM | GSM
             ps.add(new PayloadComponent(com.getName()));

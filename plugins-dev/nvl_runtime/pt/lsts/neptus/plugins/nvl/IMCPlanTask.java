@@ -32,19 +32,34 @@
  */
 package pt.lsts.neptus.plugins.nvl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import pt.lsts.imc.PlanSpecification;
+import pt.lsts.neptus.types.mission.plan.PlanCompatibility;
 import pt.lsts.neptus.types.mission.plan.PlanType;
 import pt.lsts.nvl.imc.AbstractIMCPlanTask;
+import pt.lsts.nvl.runtime.NodeFilter;
+import pt.lsts.nvl.runtime.Payload;
+import pt.lsts.nvl.runtime.PayloadComponent;
 
 
 public final class IMCPlanTask extends AbstractIMCPlanTask {
-
-    public IMCPlanTask(PlanType plan) { 
+    
+    private List<PayloadComponent> requirements = Collections.synchronizedList(new ArrayList<>());;
+    
+    public IMCPlanTask(PlanType plan) {
         super(plan.getId(), (PlanSpecification) plan.asIMCPlan(true));
+        //PlanType only allows definitions of sensor payload other payloads must be defined through setRequirements 
+        for(String p: PlanCompatibility.payloadsRequired(plan))
+            requirements.add(new PayloadComponent(p));
+        checkPayload();
     }
     
     public IMCPlanTask(PlanSpecification plan){
         super(plan.getPlanId(), plan);
+        checkPayload();
     }
     
 
@@ -52,6 +67,23 @@ public final class IMCPlanTask extends AbstractIMCPlanTask {
     public IMCPlanExecutor getExecutor() {
         return new IMCPlanExecutor(this);
     }
-
+    
+    public void checkPayload(){
+        for(PayloadComponent p: getRequirements().getRequiredPayload().getComponents())
+            System.out.println(p.getName());
+    }
+    
+    public NodeFilter  getRequirements( ){
+             
+        return new NodeFilter().payload(new Payload(requirements));
+    }
+    
+    public void setRequirements(NodeFilter requirements ){
+        this.requirements = requirements.getRequiredPayload().getComponents();
+    }
+    
+   public void addRequirement(String name){
+       requirements.add(new PayloadComponent(name));
+   }
    
 }
