@@ -62,6 +62,7 @@ public enum NeptusPlatform implements Platform {
 
     private final Map<String,IMCPlanTask> imcPlanTasks = new ConcurrentHashMap<>();
 
+
     public static final NeptusPlatform getInstance() {
         return INSTANCE;
     }
@@ -184,6 +185,7 @@ public enum NeptusPlatform implements Platform {
     
     public void stopExecution() {
        Engine.getInstance().stopExecution(); 
+       //TODO invoke IMCPlanExecutor.teardown() somehow 
     }  
 
     @Override

@@ -129,12 +129,13 @@ public class NodeAdapter implements Node {
     @Override
     public void release() {
         // Temporary workaround
+//        ImcMsgManager.getManager().sendMessageToSystem(new Abort(), getId());
         PlanControl stop = new PlanControl();
         stop.setRequestId(IMCSendMessageUtils.getNextRequestId());
         stop.setOpStr("STOP");
         stop.setType(TYPE.REQUEST);
         ImcMsgManager.getManager().sendMessageToSystem(stop, getId());
-        //ImcMsgManager.getManager().sendMessageToSystem(new Abort(), getId());
+
     }
 
 }

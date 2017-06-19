@@ -37,6 +37,7 @@ import pt.lsts.imc.PlanControlState;
 import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.messages.listener.MessageInfo;
 import pt.lsts.neptus.messages.listener.MessageListener;
+import pt.lsts.nvl.dsl.Engine;
 import pt.lsts.nvl.imc.AbstractIMCPlanExecutor;
 
 
@@ -45,8 +46,10 @@ public final class IMCPlanExecutor extends AbstractIMCPlanExecutor {
     
     private final MessageListener<MessageInfo, IMCMessage> pcsListener = 
             (info, message) -> { 
-                d("Got PCS message");
-                onStateUpdate((PlanControlState) message); 
+                if(Engine.getInstance().isScriptRunning()){
+                    d("Got PCS message");
+                    onStateUpdate((PlanControlState) message); 
+                }
     };
   
     public IMCPlanExecutor(IMCPlanTask theTask) {
