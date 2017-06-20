@@ -54,23 +54,16 @@ public final class IMCPlanTask extends AbstractIMCPlanTask {
         //PlanType only allows definitions of sensor payload other payloads must be defined through setRequirements 
         for(String p: PlanCompatibility.payloadsRequired(plan))
             requirements.add(new PayloadComponent(p));
-        checkPayload();
     }
     
     public IMCPlanTask(PlanSpecification plan){
         super(plan.getPlanId(), plan);
-        checkPayload();
     }
     
 
     @Override
     public IMCPlanExecutor getExecutor() {
         return new IMCPlanExecutor(this);
-    }
-    
-    public void checkPayload(){
-        for(PayloadComponent p: getRequirements().getRequiredPayload().getComponents())
-            System.out.println(p.getName());
     }
     
     public NodeFilter  getRequirements( ){

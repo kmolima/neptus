@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<console name="Neptus Console" width="1282" height="1029" resizable="true" mission-file="../../missions/APDL/missao-apdl.nmisz" main-vehicle="x8-02">
-  <!-- Data saved on 2017-06-12T18:07:55.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
+<console name="Neptus Console" width="1282" height="1029" resizable="true" mission-file="../../missions/APDL/missao-apdl.nmisz" main-vehicle="lauv-xplore-1">
+  <!-- Data saved on 2017-06-20T14:12:54.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
   <mainpanel name="console main panel">
     <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1280" height="945">
       <properties>
@@ -88,9 +88,7 @@
         <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="974" height="945">
-        <properties>
-          <entry key="Show world map">false</entry>
-        </properties>
+        <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.planning.MissionTreePanel" x="0" y="162" width="294" height="777">
         <properties/>

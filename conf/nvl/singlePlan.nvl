@@ -1,5 +1,5 @@
 
-v = pick { type 'UUV'; timeout 12.seconds; id 'lauv-xplore-1';
+v = pick { type 'UUV'; timeout 15.seconds; id 'lauv-xplore-1';
             payload 'LBL'}
 
 
