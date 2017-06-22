@@ -1,15 +1,20 @@
-def sortedlocations = locations.sort {it.getId()} //from bindings
+//Manipulate Points of Interest in the Map
+// Binding variable: locations (Map<String,Location)
+// To get a Location in the Map: locations.get('name')     
+
+
+def sortedlocations = locations.sort {it.key} //from bindings
 
 ArrayList<Location> pois  = new ArrayList<>()
 
 sortedlocations.each {
-    	println it.getId() 
-        def loc = new Location(it.getLatitudeRads(),it.getLongitudeRads())
+    	   println it.key
+        def loc = it.value //new Location(it.getLatitudeRads(),it.getLongitudeRads())
         pois.add loc 
     }
     
     new Plan(console).with{
-    	println location.latitude+" " + location.longitude
+    
     planName "Travel-POIs"
 
     pois.each {goTo location:it}

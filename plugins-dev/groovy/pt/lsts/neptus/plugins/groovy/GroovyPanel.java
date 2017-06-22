@@ -54,12 +54,9 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import com.google.common.eventbus.Subscribe;
-
 import pt.lsts.neptus.NeptusLog;
 import pt.lsts.neptus.console.ConsoleLayout;
 import pt.lsts.neptus.console.ConsolePanel;
-import pt.lsts.neptus.console.events.ConsoleEventVehicleStateChanged;
 import pt.lsts.neptus.i18n.I18n;
 import pt.lsts.neptus.plugins.NeptusProperty;
 import pt.lsts.neptus.plugins.PluginDescription;
@@ -250,10 +247,10 @@ public class GroovyPanel extends ConsolePanel {
         engine.planChange(changedPlan);
     }*/
 
-    @Subscribe
-    public void onVehicleStateChanged(ConsoleEventVehicleStateChanged e) {
-        engine.vehicleStateChanged(e);
-    }
+//    @Subscribe
+//    public void onVehicleStateChanged(ConsoleEventVehicleStateChanged e) {
+//        engine.vehicleStateChanged(e);
+//    }
 
     /**
      * 

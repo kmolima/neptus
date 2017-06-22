@@ -119,8 +119,7 @@ public class PlanScript extends DSLPlan {
 
         return l;
     }
-        
-    
+       
     
     public void addToConsole(){
         
@@ -161,10 +160,9 @@ public class PlanScript extends DSLPlan {
                  
             }
             catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                if(neptusConsole!=null)
-                       neptusConsole.getMainPanel(); //TODO Warn user that plan does not exists on console
+               NeptusLog.pub().error(e.getMessage(), e);
+                //e.printStackTrace();
+                
             }
        return null;
     }

@@ -1,8 +1,7 @@
+//List Bindings
 
 println "Binding Variables"
 
-
-//List Bindings
 if(vehicles!=null){
 
 	vehicles.eachWithIndex {
@@ -21,7 +20,7 @@ if(plans!=null){
 if(locations!=null) {
 	locations.eachWithIndex {
 		loc,index -> 
-			println index+".LOCATION: "+loc
+			println index+".LOCATION: "+loc.key
 		}
 	}
 		

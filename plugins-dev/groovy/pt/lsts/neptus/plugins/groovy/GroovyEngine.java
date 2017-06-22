@@ -45,13 +45,12 @@ import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import pt.lsts.imc.VehicleState;
+import pt.lsts.imc.groovy.dsl.Location;
 import pt.lsts.neptus.NeptusLog;
 import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.comm.manager.imc.ImcSystem;
 import pt.lsts.neptus.comm.manager.imc.ImcSystemsHolder;
 import pt.lsts.neptus.console.events.ConsoleEventPlanChange;
-import pt.lsts.neptus.console.events.ConsoleEventVehicleStateChanged;
-import pt.lsts.neptus.types.coord.LocationType;
 import pt.lsts.neptus.types.map.MapGroup;
 import pt.lsts.neptus.types.map.MarkElement;
 import pt.lsts.neptus.types.mission.plan.PlanType;
@@ -66,7 +65,7 @@ public class GroovyEngine {
     //Collections used to make Map thread safe
     private Map<String,ImcSystem> vehicles = Collections.synchronizedMap(new HashMap<>()); 
     private Map<String,PlanType> plans = Collections.synchronizedMap(new HashMap<>()); 
-    private Map<String,LocationType> locations = Collections.synchronizedMap(new HashMap<>());
+    private Map<String,Location> locations = Collections.synchronizedMap(new HashMap<>());
     private Binding binds; //verify use of @TypeChecked
     private GroovyScriptEngine engine;
     private CompilerConfiguration config;
@@ -84,7 +83,7 @@ public class GroovyEngine {
     
     public GroovyEngine(GroovyPanel c){
         this.console = c;
-        add_console_vars();
+        setup();
         buffer = new StringBuffer();
         scriptOutput = new Writer(){
 
@@ -130,29 +129,11 @@ public class GroovyEngine {
     /**
      * 
      */
-    private void add_console_vars() {
-        binds = new Binding();
-
+    private void setup() {
         
-        for(ImcSystem v: ImcSystemsHolder.lookupActiveSystemVehicles()){
-            VehicleState state  = ImcMsgManager.getManager().getState(v.getName()).last(VehicleState.class);
-            if (state != null && state.getOpMode() == VehicleState.OP_MODE.SERVICE) {
-                vehicles.put(v.getName(), v);
-            }
-        }
-        binds.setVariable("vehicles",vehicles);
-        reloadPlansFromConsole();
-      
-     
-        //POI/MarkElement
-        for( MarkElement mark: MapGroup.getMapGroupInstance(console.getConsole().getMission()).getAllObjectsOfType(MarkElement.class)){
-            if(!mark.obstacle)
-                locations.put(mark.getId(),mark.getPosition());
-            
-        }
-        binds.setVariable("locations", locations.values().toArray());
-        binds.setVariable("console", console.getConsole()); //TODO NOTIFY the existing binding to be used in the script
-
+        binds = new Binding();
+        binds.setVariable("console", console.getConsole());
+      //updateBindings();
         config = new CompilerConfiguration();
         customizer = new ImportCustomizer();
         customizer.addImports("pt.lsts.imc.net.IMCProtocol","pt.lsts.neptus.types.coord.LocationType");
@@ -188,8 +169,8 @@ public class GroovyEngine {
             @Override
             public void run() {
                 try {
+                    updateBindings();
                     binds.setProperty("out",ps);
-                    reloadPlansFromConsole();
                     engine.run(groovyScript, binds);
                     console.disableStopButton();
                     stopScript();
@@ -212,10 +193,31 @@ public class GroovyEngine {
     }
     
 
-    private void reloadPlansFromConsole() {
+    private void updateBindings() {
         plans.clear();
+        locations.clear();
+        vehicles.clear();
+        
+        for(ImcSystem v: ImcSystemsHolder.lookupActiveSystemVehicles()){
+            VehicleState state  = ImcMsgManager.getManager().getState(v.getName()).last(VehicleState.class);
+            if (state != null && state.getOpMode() == VehicleState.OP_MODE.SERVICE) {
+                vehicles.put(v.getName(), v);
+            }
+        }
+        binds.setVariable("vehicles",vehicles);
+        
         for(PlanType p: console.getConsole().getMission().getIndividualPlansList().values())
             plans.put(p.getId(),p);
+        
+        //POI/MarkElement
+        for( MarkElement mark: MapGroup.getMapGroupInstance(console.getConsole().getMission()).getAllObjectsOfType(MarkElement.class)){
+            if(!mark.obstacle){
+                Location loc = new Location(mark.getPosition().getLatitudeRads(),mark.getPosition().getLongitudeRads());
+                locations.put(mark.getId(),loc);
+            }
+            
+        }
+        binds.setVariable("locations", locations);
         binds.setVariable("plans",plans);        
     }
 
@@ -238,48 +240,38 @@ public class GroovyEngine {
         
     }
 
-    /**
-     * @param e
-     */
-    public void vehicleStateChanged(ConsoleEventVehicleStateChanged e) {
-        switch (e.getState()) {
-            case SERVICE: //case CONNECTED
-                if (ImcSystemsHolder.getSystemWithName(e.getVehicle()).isActive()) {
-                    //add new vehicle
-                    if(!vehicles.containsKey(e.getVehicle())) {
-                        vehicles.put(e.getVehicle(),ImcSystemsHolder.getSystemWithName(e.getVehicle()));
-                        binds.setVariable("vehicles", vehicles);
-                        //System.out.println("Added "+e.getVehicle()+" Size: "+vehicles.keySet().size());
-                    }
-                }
-                break;
-            case ERROR:
-                if(vehicles.containsKey(e.getVehicle())){
-                    vehicles.remove(e.getVehicle());
-                    binds.setVariable("vehicles", vehicles);
-                }
-                break;
-            case DISCONNECTED:
-                if(vehicles.containsKey(e.getVehicle())){
-                    vehicles.remove(e.getVehicle());
-                    binds.setVariable("vehicles", vehicles);
-                    //System.out.println("Removed "+e.getVehicle()+" Size: "+vehicles.keySet().size());
-                }
-                break;
-            case CALIBRATION:// or case MANEUVER
-            case MANEUVER:
-                if(vehicles.containsKey(e.getVehicle())){
-                    vehicles.remove(e.getVehicle());
-                    binds.setVariable("vehicles", vehicles);
-                    //System.out.println("Removed "+e.getVehicle()+" Size: "+vehicles.keySet().size());
-                }
-                break;
-
-            default:
-                break;
-        }
-        
-    }
+//    /**
+//     * @param e
+//     */
+//    public void vehicleStateChanged(ConsoleEventVehicleStateChanged e) {
+//        switch (e.getState()) {
+//            case SERVICE: //case CONNECTED
+//                if (ImcSystemsHolder.getSystemWithName(e.getVehicle()).isActive()) {
+//                    //add new vehicle
+//                    if(!vehicles.containsKey(e.getVehicle())) {
+//                        vehicles.put(e.getVehicle(),ImcSystemsHolder.getSystemWithName(e.getVehicle()));
+//                        binds.setVariable("vehicles", vehicles);
+//                        //System.out.println("Added "+e.getVehicle()+" Size: "+vehicles.keySet().size());
+//                    }
+//                }
+//                break;
+//            case ERROR:
+//            case DISCONNECTED:
+//            case BOOT:
+//            case CALIBRATION:
+//            case MANEUVER:
+//                if(vehicles.containsKey(e.getVehicle())){
+//                    vehicles.remove(e.getVehicle());
+//                    binds.setVariable("vehicles", vehicles);
+//                    //System.out.println("Removed "+e.getVehicle()+" Size: "+vehicles.keySet().size());
+//                }
+//                break;
+//
+//            default:
+//                break;
+//        }
+//        
+//    }
     
 
     /**

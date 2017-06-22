@@ -1,14 +1,13 @@
+//Example script to manipulate locations in the map 
+//  through binding variable locations
 
 
+def random_loc1 = locations.get 'ToAvoidLoc1'
 
+def p1 =new Plan(console)
 
-
-def p =new Plan(console)
-
-println p.getPlan_id()
-locations.each {
-
-	p.goTo location: new Location(it.getLatitudeRads(),it.getLongitudeRads())
-	
-	}
-	p.addToConsole()
+p1.with {
+	planName "Location_1"
+	goTo location: random_loc1
+	addToConsole()
+}
