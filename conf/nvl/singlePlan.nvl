@@ -1,6 +1,6 @@
 
-v = pick { type 'UUV'; timeout 15.seconds; id 'lauv-xplore-1';
-            payload 'LBL'}
+v = pick { type 'UUV'; timeout 15.seconds; id 'lauv-noptilus-1';
+            payload 'GSM'}
 
 
 execute v: task('pl_1xr0cw') 
