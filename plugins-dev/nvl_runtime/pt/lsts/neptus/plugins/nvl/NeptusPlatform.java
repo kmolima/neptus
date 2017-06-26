@@ -49,7 +49,6 @@ import pt.lsts.neptus.comm.IMCUtils;
 import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.comm.manager.imc.ImcSystem;
 import pt.lsts.neptus.comm.manager.imc.ImcSystemsHolder;
-import pt.lsts.neptus.console.events.ConsoleEventPlanChange;
 import pt.lsts.neptus.types.mission.plan.PlanType;
 import pt.lsts.nvl.dsl.Engine;
 import pt.lsts.nvl.runtime.EnvironmentException;
@@ -114,22 +113,22 @@ public enum NeptusPlatform implements Platform {
         return set;
     }
 
-    public void onPlanChanged(ConsoleEventPlanChange changedPlan) {
-        PlanType oldPlan = changedPlan.getOld();
-        PlanType newPlan = changedPlan.getCurrent();
-
-        if (newPlan == null){
-            if(! consolePanel.getConsole().getMission().getIndividualPlansList().containsKey(oldPlan.getId())){
-                displayMessage("removing IMC plan %s", oldPlan.getId());
-                imcPlanTasks.remove(oldPlan.getId());
-            }
-        }
-        else{
-            displayMessage("replacing IMC plan %s", oldPlan.getId());
-            imcPlanTasks.put(newPlan.getId(), new IMCPlanTask((PlanSpecification) oldPlan.asIMCPlan(true)));
-        }
-
-    }
+//    public void onPlanChanged(ConsoleEventPlanChange changedPlan) {
+//        PlanType oldPlan = changedPlan.getOld();
+//        PlanType newPlan = changedPlan.getCurrent();
+//
+//        if (newPlan == null){
+//            if(! consolePanel.getConsole().getMission().getIndividualPlansList().containsKey(oldPlan.getId())){
+//                displayMessage("removing IMC plan %s", oldPlan.getId());
+//                imcPlanTasks.remove(oldPlan.getId());
+//            }
+//        }
+//        else{
+//            displayMessage("replacing IMC plan %s", oldPlan.getId());
+//            imcPlanTasks.put(newPlan.getId(), new IMCPlanTask((PlanSpecification) oldPlan.asIMCPlan(true)));
+//        }
+//
+//    }
     
     public void storeInConsole(PlanSpecification ps){
         

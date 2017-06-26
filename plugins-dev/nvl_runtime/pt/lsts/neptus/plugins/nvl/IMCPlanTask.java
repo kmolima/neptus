@@ -32,20 +32,11 @@
  */
 package pt.lsts.neptus.plugins.nvl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import java.util.List;
 
 import pt.lsts.imc.PlanSpecification;
 import pt.lsts.nvl.imc.AbstractIMCPlanTask;
-import pt.lsts.nvl.runtime.NodeFilter;
-import pt.lsts.nvl.runtime.Payload;
-import pt.lsts.nvl.runtime.PayloadComponent;
 
 public final class IMCPlanTask extends AbstractIMCPlanTask implements Cloneable {
-    
-    private List<PayloadComponent> requirements = Collections.synchronizedList(new ArrayList<>());;
     
     public IMCPlanTask(PlanSpecification plan){
         super(plan.getPlanId(), plan);
@@ -57,19 +48,7 @@ public final class IMCPlanTask extends AbstractIMCPlanTask implements Cloneable 
         return new IMCPlanExecutor(this);
     }
     
-    public NodeFilter  getRequirements( ){
-             
-        return new NodeFilter().payload(new Payload(requirements));
-    }
-    
-    public void setRequirements(NodeFilter requirements ){
-        this.requirements = requirements.getRequiredPayload().getComponents();
-    }
-    
-   public void addRequirement(String name){
-       requirements.add(new PayloadComponent(name));
-   }
-   
+  
    @Override
    public IMCPlanTask clone() {
        return new IMCPlanTask(getPlanSpecification());

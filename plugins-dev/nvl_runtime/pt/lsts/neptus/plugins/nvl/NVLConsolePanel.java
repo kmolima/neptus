@@ -62,12 +62,10 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import com.google.common.eventbus.Subscribe;
 
 import pt.lsts.neptus.NeptusLog;
 import pt.lsts.neptus.console.ConsoleLayout;
 import pt.lsts.neptus.console.ConsolePanel;
-import pt.lsts.neptus.console.events.ConsoleEventPlanChange;
 import pt.lsts.neptus.i18n.I18n;
 import pt.lsts.neptus.plugins.PluginDescription;
 import pt.lsts.neptus.plugins.Popup;
@@ -249,11 +247,11 @@ public class NVLConsolePanel extends ConsolePanel {
 
     }
 
-    @Subscribe
+   /* @Subscribe
     public void on(ConsoleEventPlanChange changedPlan) {
         NeptusPlatform.getInstance().onPlanChanged(changedPlan);
 
-    }
+    }*/
 
 
     public void displayMessage(String fmt, Object[] args) {
