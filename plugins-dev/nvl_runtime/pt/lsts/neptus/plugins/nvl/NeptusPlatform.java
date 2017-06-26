@@ -89,7 +89,7 @@ public enum NeptusPlatform implements Platform {
         imcPlanTasks.clear();
         for(PlanType plan: cp.getConsole().getMission().getIndividualPlansList().values()){
             displayMessage("IMC plan available: %s", plan.getId());
-            imcPlanTasks.put(plan.getId(), new IMCPlanTask(plan));
+            imcPlanTasks.put(plan.getId(), new IMCPlanTask((PlanSpecification) plan.asIMCPlan(true)));
         }
     }
 
@@ -126,7 +126,7 @@ public enum NeptusPlatform implements Platform {
         }
         else{
             displayMessage("replacing IMC plan %s", oldPlan.getId());
-            imcPlanTasks.put(newPlan.getId(), new IMCPlanTask(newPlan));
+            imcPlanTasks.put(newPlan.getId(), new IMCPlanTask((PlanSpecification) oldPlan.asIMCPlan(true)));
         }
 
     }
