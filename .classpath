@@ -6,7 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="plugins-dev/nvl_runtime"/>
-	<classpathentry kind="src" path="plugins-dev/groovy"/>
 	<classpathentry kind="src" output="build/tests" path="srcTests"/>
 	<classpathentry kind="src" path="plugins-dev/accu"/>
 	<classpathentry kind="src" path="plugins-dev/acoustic"/>
