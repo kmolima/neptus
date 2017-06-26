@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<console name="Neptus Console" width="1282" height="1029" resizable="true" mission-file="../../missions/APDL/missao-apdl.nmisz" main-vehicle="lauv-xplore-1">
-  <!-- Data saved on 2017-06-20T14:12:54.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
+<console name="Neptus Console" width="1366" height="743" resizable="true" mission-file="../../missions/APDL/missao-apdl-nvl.nmisz" main-vehicle="lauv-xplore-1">
+  <!-- Data saved on 2017-06-26T01:21:04.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
   <mainpanel name="console main panel">
-    <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1280" height="945">
+    <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1364" height="660">
       <properties>
         <entry key="XML Definitions">&lt;profiles&gt;
   &lt;profile name="Normal"&gt;
@@ -87,10 +87,10 @@
       <child class="pt.lsts.neptus.plugins.map.MapEditor" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="974" height="945">
+      <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="1058" height="660">
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.console.plugins.planning.MissionTreePanel" x="0" y="162" width="294" height="777">
+      <child class="pt.lsts.neptus.console.plugins.planning.MissionTreePanel" x="0" y="162" width="294" height="492">
         <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.planning.MultiVehiclePlanOverlay" x="0" y="0" width="0" height="0">
@@ -147,7 +147,7 @@ altitude: ${EstimatedState.alt};
           <entry key="groovyScript">/home/lsts/workspace/neptus-keila/conf/groovy/scripts/locs</entry>
         </properties>
       </child>
-      <child class="pt.lsts.neptus.plugins.nvl.NVLConsolePanel" x="0" y="0" width="598" height="472">
+      <child class="pt.lsts.neptus.plugins.nvl.NVLConsolePanel" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
     </subpanel>

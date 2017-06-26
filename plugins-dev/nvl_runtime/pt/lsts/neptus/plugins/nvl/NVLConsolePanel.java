@@ -34,6 +34,7 @@ package pt.lsts.neptus.plugins.nvl;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -46,8 +47,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory;
@@ -73,13 +80,15 @@ import pt.lsts.neptus.util.ImageUtils;
 @SuppressWarnings("serial")
 public class NVLConsolePanel extends ConsolePanel {
 
-    private Border border;
+    private Border border,fontBorder;
     private JScrollPane outputPanel;
     private JTextArea output;
     private RSyntaxTextArea editor; 
     private File script;
     private JButton select,execButton,stop,saveFile;
     private RTextScrollPane scroll;
+    private SpinnerModel model = new SpinnerNumberModel(14, 2, 32, 1);     
+    private JSpinner spinner = new JSpinner(model);
     public NVLConsolePanel(ConsoleLayout layout) {
         super(layout);
     }
@@ -94,11 +103,9 @@ public class NVLConsolePanel extends ConsolePanel {
         
         //Custom syntax highlight
         AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory)TokenMakerFactory.getDefaultInstance();
-        atmf.putMapping("text/nvl", "pt.lsts.neptus.plugins.nvl.HighlightSupport");
+        atmf.putMapping("text/nvl", "pt.lsts.neptus.plugins.nvl.HighlightSupport"); //NVLHighlightSupport.SYNTAX_STYLE_GROOVY
         editor.setSyntaxEditingStyle("text/nvl");
-        // editor.setSyntaxEditingStyle(NVLHighlightSupport.SYNTAX_STYLE_GROOVY);
         editor.setCodeFoldingEnabled(true);
-        editor.setPreferredSize(new Dimension(600, 300));
         scroll = new RTextScrollPane(editor);
 
         if (script != null) {
@@ -153,7 +160,15 @@ public class NVLConsolePanel extends ConsolePanel {
                 }
             }
         };
-
+        
+        ChangeListener listener = new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                    editor.setFont(new Font(Font.MONOSPACED, 0, (int) spinner.getValue()));
+                
+            }
+          };
+        
         //Output panel
         output = new JTextArea();
         border = BorderFactory.createTitledBorder("Script Output");
@@ -200,10 +215,19 @@ public class NVLConsolePanel extends ConsolePanel {
         //Console layout
         JPanel top = new JPanel(new BorderLayout());
         JPanel buttons = new JPanel();
+        
+        spinner.addChangeListener(listener);
+        fontBorder = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),"Font");
+        ((TitledBorder) fontBorder).setTitlePosition(TitledBorder.BOTTOM);
+        spinner.setBorder(fontBorder); 
+        spinner.setPreferredSize(new Dimension(65,35));
+        //middle
         buttons.add(select);
         buttons.add(saveFile);
         buttons.add(execButton);
         buttons.add(stop);
+        buttons.add(spinner);
+        
         top.setPreferredSize(new Dimension(600, 350));
         top.add(buttons,BorderLayout.SOUTH);
         top.add(scroll,BorderLayout.CENTER);
@@ -216,16 +240,6 @@ public class NVLConsolePanel extends ConsolePanel {
 
         add(bottom,BorderLayout.SOUTH);
         add(top,BorderLayout.CENTER);
-
-
-        //        JProgressBar progressBar = new JProgressBar(SwingConstants.HORIZONTAL);
-        //        Border border = BorderFactory.createTitledBorder("Testing...");
-        //        progressBar.setValue(0); //TODO during task exec?
-        //        progressBar.setStringPainted(true);
-        //        progressBar.setBorder(border);
-        //        holder.add(progressBar,BorderLayout.SOUTH);
-
-
 
     }
 

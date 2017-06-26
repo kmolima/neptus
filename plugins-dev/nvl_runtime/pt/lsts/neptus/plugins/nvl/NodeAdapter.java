@@ -69,7 +69,7 @@ public class NodeAdapter implements Node {
         } 
         for(CommMean com : VehiclesHolder.getVehicleById(getId()).getCommunicationMeans().values()) { //IMC | HTTP | IRIDIUM | GSM
             ps.add(new PayloadComponent(com.getName()));
-            System.out.println("Communications means: "+com.getName());
+            //System.out.println("Communications means: "+com.getName());
         }
         if(hasAcoustics()){
             ps.add(new PayloadComponent("Acoustics"));
