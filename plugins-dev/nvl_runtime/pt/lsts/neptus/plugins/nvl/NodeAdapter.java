@@ -35,10 +35,8 @@ package pt.lsts.neptus.plugins.nvl;
 import java.util.ArrayList;
 import java.util.List;
 
-import pt.lsts.imc.PlanControl;
-import pt.lsts.imc.PlanControl.TYPE;
+import pt.lsts.imc.Abort;
 import pt.lsts.imc.PlanManeuver;
-import pt.lsts.neptus.comm.IMCSendMessageUtils;
 import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.comm.manager.imc.ImcSystem;
 import pt.lsts.neptus.comm.manager.imc.ImcSystemsHolder;
@@ -129,12 +127,12 @@ public class NodeAdapter implements Node {
     @Override
     public void release() {
         // Temporary workaround
-//        ImcMsgManager.getManager().sendMessageToSystem(new Abort(), getId());
-        PlanControl stop = new PlanControl();
-        stop.setRequestId(IMCSendMessageUtils.getNextRequestId());
-        stop.setOpStr("STOP");
-        stop.setType(TYPE.REQUEST);
-        ImcMsgManager.getManager().sendMessageToSystem(stop, getId());
+        ImcMsgManager.getManager().sendMessageToSystem(new Abort(), getId());
+//        PlanControl stop = new PlanControl();
+//        stop.setRequestId(IMCSendMessageUtils.getNextRequestId());
+//        stop.setOpStr("STOP");
+//        stop.setType(TYPE.REQUEST);
+//        ImcMsgManager.getManager().sendMessageToSystem(stop, getId()); //TODO use accoustics if return value is false?
 
     }
 
