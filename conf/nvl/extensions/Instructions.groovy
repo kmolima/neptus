@@ -26,9 +26,7 @@ class Instructions {
       code()
       def ps = dslPlan.asPlanSpecification()
       NeptusPlatform.INSTANCE.storeInConsole(ps)
-      def planTask = new IMCPlanTask(ps)
-      dslPlan.getPayloadRequirements().each{ planTask.addRequirement it }
-      planTask
+      new IMCPlanTask(ps)
 
   }
   

@@ -55,7 +55,6 @@ import pt.lsts.nvl.dsl.Engine;
 import pt.lsts.nvl.runtime.EnvironmentException;
 import pt.lsts.nvl.runtime.NodeSet;
 import pt.lsts.nvl.runtime.Platform;
-import pt.lsts.nvl.runtime.tasks.PlatformTask;
 
 public enum NeptusPlatform implements Platform {
     INSTANCE;
@@ -148,13 +147,13 @@ public enum NeptusPlatform implements Platform {
     }
     
     @Override
-    public PlatformTask getPlatformTask(String id) {
-        PlatformTask task = imcPlanTasks.get(id);
+    public IMCPlanTask getPlatformTask(String id) {
+        IMCPlanTask task = imcPlanTasks.get(id);
         if (task == null) {
             displayMessage("No such IMC plan: '%s'", id);
             throw new EnvironmentException("No such IMC plan: " + id);
         }
-        return task;
+        return task.clone();
     }
 
     @Override

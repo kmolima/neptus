@@ -45,7 +45,7 @@ import pt.lsts.nvl.runtime.Payload;
 import pt.lsts.nvl.runtime.PayloadComponent;
 
 
-public final class IMCPlanTask extends AbstractIMCPlanTask {
+public final class IMCPlanTask extends AbstractIMCPlanTask implements Cloneable {
     
     private List<PayloadComponent> requirements = Collections.synchronizedList(new ArrayList<>());;
     
@@ -79,4 +79,8 @@ public final class IMCPlanTask extends AbstractIMCPlanTask {
        requirements.add(new PayloadComponent(name));
    }
    
+   @Override
+   public IMCPlanTask clone() {
+       return new IMCPlanTask(getPlanSpecification());
+   }
 }
