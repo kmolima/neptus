@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="plugins-dev/nvl_runtime"/>
+	<classpathentry kind="src" path="plugins-dev/groovy"/>
 	<classpathentry kind="src" output="build/tests" path="srcTests"/>
 	<classpathentry kind="src" path="plugins-dev/accu"/>
 	<classpathentry kind="src" path="plugins-dev/acoustic"/>
@@ -259,5 +260,6 @@
 	<classpathentry kind="lib" path="lib/groovy-all-2.4.11.jar"/>
 	<classpathentry kind="lib" path="lib/imc_plan_dsl.jar"/>
 	<classpathentry kind="lib" path="lib/rsyntaxtextarea-2.5.8.jar"/>
+	<classpathentry kind="lib" path="plugins-dev/groovy/lib/rsyntaxtextarea-2.5.8.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

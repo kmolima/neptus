@@ -1,0 +1,22 @@
+//Manipulate Points of Interest in the Map
+// Binding variable: locations (Map<String,Location>)
+// To get a Location in the Map: locations.get('name')     
+
+
+def sortedlocations = locations.sort {it.key} //from bindings
+
+ArrayList<Location> pois  = new ArrayList<>()
+
+sortedlocations.each {
+    	   println it.key
+        def loc = it.value //new Location(it.getLatitudeRads(),it.getLongitudeRads())
+        pois.add loc 
+    }
+    
+    new Plan(console).with{
+    
+    planName "Travel-POIs"
+
+    pois.each {goTo location:it}
+    addToConsole()
+	}    
