@@ -87,7 +87,7 @@ public enum NeptusPlatform implements Platform {
     private void uploadConsolePlans(NVLConsolePanel cp) {
         imcPlanTasks.clear();
         for(PlanType plan: cp.getConsole().getMission().getIndividualPlansList().values()){
-            displayMessage("IMC plan available: %s", plan.getId());
+            //displayMessage("IMC plan available: %s", plan.getId());
             imcPlanTasks.put(plan.getId(), new IMCPlanTask((PlanSpecification) plan.asIMCPlan(true)));
         }
     }
@@ -147,6 +147,7 @@ public enum NeptusPlatform implements Platform {
     
     @Override
     public IMCPlanTask getPlatformTask(String id) {
+        uploadConsolePlans(consolePanel);
         IMCPlanTask task = imcPlanTasks.get(id);
         if (task == null) {
             displayMessage("No such IMC plan: '%s'", id);
