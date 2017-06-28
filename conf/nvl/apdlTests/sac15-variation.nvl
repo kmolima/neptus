@@ -5,10 +5,10 @@ uuv3 = pick { type 'UUV' }
 uav = pick { type 'UAV' }
 
 execute uuv1: 
-          imcPlan('survey1') >> 
+          imcPlan('test') >> 
           action { post ready:1 },
         uuv2: 
-          imcPlan('survey2') >>
+          imcPlan('IMCDSL') >>
           action { post ready:2 },
         uuv3: 
           imcPlan('survey3') >>

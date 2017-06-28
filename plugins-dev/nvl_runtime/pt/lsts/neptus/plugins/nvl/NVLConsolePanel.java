@@ -73,7 +73,7 @@ import pt.lsts.neptus.util.FileUtil;
 import pt.lsts.neptus.util.ImageUtils;
 
 
-@PluginDescription(name = "NVL Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/nvl/images/tide.jpg")
+@PluginDescription(name = "NVL Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/nvl/images/dolphin.png")
 @Popup(pos = Popup.POSITION.BOTTOM_RIGHT, width=600, height=500)
 @SuppressWarnings("serial")
 public class NVLConsolePanel extends ConsolePanel {
@@ -87,6 +87,7 @@ public class NVLConsolePanel extends ConsolePanel {
     private RTextScrollPane scroll;
     private SpinnerModel model = new SpinnerNumberModel(14, 2, 32, 1);     
     private JSpinner spinner = new JSpinner(model);
+    
     public NVLConsolePanel(ConsoleLayout layout) {
         super(layout);
     }
@@ -95,7 +96,7 @@ public class NVLConsolePanel extends ConsolePanel {
     @Override
     public void initSubPanel() {
         NeptusPlatform.getInstance().associateTo(this);
-
+        
         setLayout(new BorderLayout());
         editor = new RSyntaxTextArea();
         

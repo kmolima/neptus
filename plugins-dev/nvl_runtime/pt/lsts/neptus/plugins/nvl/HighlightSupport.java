@@ -190,7 +190,6 @@ public class HighlightSupport extends GroovyTokenMaker {
      */
     public TokenMap getWordsToHighlight() {
           tokenMap.put("task", Token.IDENTIFIER); //or Token.RESERVED_WORD_2;
-          tokenMap.put("during", Token.IDENTIFIER); //or Token.RESERVED_WORD_2;
           tokenMap.put("message", Token.IDENTIFIER); //or Token.RESERVED_WORD_2;
           tokenMap.put("type", Token.IDENTIFIER); //or Token.RESERVED_WORD_2;
           tokenMap.put("timeout", Token.IDENTIFIER); //or Token.RESERVED_WORD_2;
@@ -204,7 +203,6 @@ public class HighlightSupport extends GroovyTokenMaker {
           
           tokenMap.put("execute", Token.RESERVED_WORD); 
           tokenMap.put("halt", Token.RESERVED_WORD); 
-          tokenMap.put("idle", Token.RESERVED_WORD); 
           tokenMap.put("pick", Token.RESERVED_WORD); 
           tokenMap.put("until", Token.RESERVED_WORD); 
           tokenMap.put("allOff", Token.RESERVED_WORD); 

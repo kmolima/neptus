@@ -1,0 +1,7 @@
+xp1 = pick {
+	id 'lauv-xplore-1'
+	}
+
+task = imcPlan 'test'
+
+execute task[xp1]
