@@ -78,13 +78,11 @@ public enum NeptusPlatform implements Platform {
         detach();
         d("attached to console");
         consolePanel = cp;
-        uploadConsolePlans(cp); 
+        refreshConsolePlans(cp); 
     }
 
-    /**
-     * 
-     */
-    private void uploadConsolePlans(NVLConsolePanel cp) {
+
+    private void refreshConsolePlans(NVLConsolePanel cp) {
         imcPlanTasks.clear();
         for(PlanType plan: cp.getConsole().getMission().getIndividualPlansList().values()){
             //displayMessage("IMC plan available: %s", plan.getId());
@@ -147,7 +145,7 @@ public enum NeptusPlatform implements Platform {
     
     @Override
     public IMCPlanTask getPlatformTask(String id) {
-        uploadConsolePlans(consolePanel);
+        refreshConsolePlans(consolePanel);
         IMCPlanTask task = imcPlanTasks.get(id);
         if (task == null) {
             displayMessage("No such IMC plan: '%s'", id);
@@ -163,20 +161,11 @@ public enum NeptusPlatform implements Platform {
           consolePanel.displayMessage(fmt, args); 
       }
     }
-    
-    public void run(String planId) {
-        if(consolePanel!=null)
-            uploadConsolePlans(consolePanel); //unable to dispatch OnPlanChangedEvent sometimes!
-        if (imcPlanTasks.containsKey(planId)) {
-            d("will run %s", planId);
-            Engine.getInstance().run(imcPlanTasks.get(planId));
-        }
-    }
 
     public void run(File scriptFile) {
         if (scriptFile.exists()) {
             if(consolePanel!=null)
-                uploadConsolePlans(consolePanel); //unable to dispatch OnPlanChangedEvent sometimes!
+                refreshConsolePlans(consolePanel); //unable to dispatch OnPlanChangedEvent sometimes!
             displayMessage("will run %s", scriptFile.getAbsolutePath());
             Engine.getInstance().run(scriptFile);
         }
