@@ -1,7 +1,8 @@
 xp1 = pick {
 	id 'lauv-xplore-1'
+	timeout 10.seconds
 	}
 
 task = imcPlan 'test'
 
-execute task[xp1]
+execute xp1:task
