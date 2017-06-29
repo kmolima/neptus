@@ -14,7 +14,7 @@ execute uuv1:
           imcPlan('survey3') >>
           action { post ready:3 },
         uav: 
-          allOf { 
+          choose { 
         	  when { consume ready:1 } then imcPlan('rv1')
         	  when { consume ready:2 } then imcPlan('rv2')
         	  when { consume ready:3 } then imcPlan('rv3')

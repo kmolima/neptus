@@ -1,0 +1,12 @@
+
+uuv = pick {
+
+	type   'UUV'
+	timeout 20.seconds 
+	
+	}
+task = imcPlan 'go_to'
+
+message 'Selected $uuv'
+
+execute uuv: task

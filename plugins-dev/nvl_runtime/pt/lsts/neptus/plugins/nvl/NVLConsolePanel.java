@@ -133,7 +133,7 @@ public class NVLConsolePanel extends ConsolePanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/nvl/");
+                File directory = new File("conf/nvl/apdlTests");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));

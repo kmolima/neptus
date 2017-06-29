@@ -19,6 +19,9 @@ conf/i18n/**/*.po
 conf/neptus-coordinateSystems.xml
 conf/neptus-misc-systems.xml
 conf/params/manta*.xml
+conf/nvl/extensions/*
+conf/nvl/apdlTests/*
+conf/groovy/*
 vehicles-defs/*-lauv-simulator-*.nvcl
 conf/params/lauv-simulator*.xml
 maps/*.conf
@@ -27,3 +30,4 @@ neptus.exe
 neptus.bat
 neptus.sh
 neptus-config.xml
+

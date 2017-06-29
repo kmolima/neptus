@@ -7,3 +7,10 @@ message (v1+v2-v1)
 message ((v1+v2) & v1)
 message ( (v1+v2) | { v -> v.getId().equals('x8-02') })
 
+n = ask 'How many vehicles?' 
+uuvs = pick {
+	type 'UUV'
+	timeout 15.seconds
+	count n
+	}
+message 'Vehicles sucessfully selected: $uuvs'

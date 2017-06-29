@@ -1,11 +1,11 @@
 
 //pause 12.seconds
 //message ( (v1+v2) | { v -> v.getId().equals('x8-02') })
-
+n = ask 'How many vehicles?' 
 uuvs = pick {
 	type 'UUV'
 	timeout 15.seconds
-	count 2
+	count n
 	}
 task_1 = imcPlan 'test'
 task_2 = imcPlan 'test' 

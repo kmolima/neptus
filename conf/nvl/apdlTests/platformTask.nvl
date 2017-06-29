@@ -2,14 +2,9 @@
 APDL = location 41.18456, -8.70590
 v = pick { 
   type 'UUV'
-  region APDL, 2.meters
+  region APDL, 2.km
   id 'lauv-xplore-2'
 }
-
-// Execute IMC Plan designed in Neptus
-//t1 = imcPlan 'Operator_Plan' 
-//execute v:t1
-
 // IMC plan defined programatically
 t2 = imcPlan {
     planName 'IMC_DSL_Plan'
@@ -21,3 +16,7 @@ t2 = imcPlan {
     loiter()
 }
 execute v:t2
+
+// Execute IMC Plan designed in Neptus
+//t1 = imcPlan 'Operator_Plan' 
+//execute v:t1
