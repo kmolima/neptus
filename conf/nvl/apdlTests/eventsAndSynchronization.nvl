@@ -1,5 +1,5 @@
 
-master = pick { id 'x8\\-02' }
+master = pick { type 'UAV' }
 slave1 = pick { type 'UUV' }
 slave2 = pick { type 'UUV' }
  
