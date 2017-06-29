@@ -5,9 +5,10 @@
 uuvs = pick {
 	type 'UUV'
 	timeout 15.seconds
+	count 2
 	}
 task_1 = imcPlan 'test'
-task_2 = imcPlan 'IMCDSL' 
+task_2 = imcPlan 'test' 
 
 message 'Vehicles sucessfully selected: '+uuvs
 

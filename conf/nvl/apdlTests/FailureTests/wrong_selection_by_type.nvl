@@ -1,5 +1,5 @@
 
-pause 15.seconds
+pause 10.seconds
 
 uav = pick {
 

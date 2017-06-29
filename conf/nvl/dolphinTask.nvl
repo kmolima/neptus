@@ -1,5 +1,5 @@
 xp1 = pick {
-	id 'lauv-xplore-1'
+	id 'lauv-xplore-2'
 	timeout 10.seconds
 	}
 

@@ -4,8 +4,8 @@ pause 15.seconds
 uuv = pick {
 
 type 'UUV'
-id   'lauv-noptilus-1'
-payload 'LBL'
+id   'lauv-noptilus-3'
+payload 'sidescan'
 }
 
 

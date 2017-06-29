@@ -1,0 +1,29 @@
+//----Parameters Definition-----
+
+def popDistance    = 500 //in meters
+def plan           = "survey3"   // already defined in the console
+double speed_value = 700.0
+def speed_unit     = "RPM"
+double z_value     = 0.0
+def z_unit         = "DEPTH"
+if(plans.get(plan)==null)
+	println "Could not find initial plan "+plan
+def initialPlan = new Plan(console,plans.get(plan))
+def start = initialPlan.initialLocation()
+def home = Location.APDL
+
+new Plan(console).with{
+	
+	planName "survey3_start"
+	
+	speed speed_value,speed_unit
+	z z_value,z_unit
+	def mdpt = midpoint(home,start,350)
+	goTo location: mdpt
+	def distance = start.distance(mdpt) / 2
+	goTo location: start.translateBy(-distance,-10)
+	
+	    vehicles "lauv-noptilus-1","lauv-noptilus-2","lauv-noptilus-3"
+	    addToConsole()
+}
+println "done"

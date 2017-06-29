@@ -1,0 +1,15 @@
+// Pick an UUV
+APDL = location 41.18456, -8.70590
+v = pick { 
+  type 'UUV'
+  region APDL, 2.meters
+
+}
+
+task = imcPlan {
+
+	goTo location: APDL
+	skeeping
+	
+	}
+execute v: task

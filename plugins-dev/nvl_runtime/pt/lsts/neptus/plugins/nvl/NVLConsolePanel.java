@@ -73,7 +73,7 @@ import pt.lsts.neptus.util.FileUtil;
 import pt.lsts.neptus.util.ImageUtils;
 
 
-@PluginDescription(name = "NVL Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/nvl/images/dolphin.png")
+@PluginDescription(name = "Dolphin Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/nvl/images/dolphin.png")
 @Popup(pos = Popup.POSITION.BOTTOM_RIGHT, width=600, height=500)
 @SuppressWarnings("serial")
 public class NVLConsolePanel extends ConsolePanel {
@@ -115,7 +115,7 @@ public class NVLConsolePanel extends ConsolePanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/nvl/");
+                File directory = new File("conf/nvl/apdlTests");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
@@ -174,7 +174,7 @@ public class NVLConsolePanel extends ConsolePanel {
         //output.setBorder(border);
         output.setEditable(false);
         output.setVisible(true);
-        output.append("NLV Runtime Console\n");
+        output.append("Dolphin Runtime Console\n");
         outputPanel = new JScrollPane(output);
         outputPanel.setBorder(border);
 
