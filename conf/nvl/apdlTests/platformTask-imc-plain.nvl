@@ -7,5 +7,5 @@ v = pick {
 }
 
 // Execute IMC Plan designed in Neptus
-t1 = imcPlan 'go_to' 
+t1 = imcPlan 'Operator_Plan' 
 execute v:t1
