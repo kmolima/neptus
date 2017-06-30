@@ -7,8 +7,8 @@ uuvs = pick {
 	timeout 15.seconds
 	count n
 	}
-task_1 = imcPlan 'test'
-task_2 = imcPlan 'test' 
+task_1 = imcPlan 'plan1'
+task_2 = imcPlan 'plan2' 
 
 message 'Vehicles sucessfully selected: '+uuvs
 

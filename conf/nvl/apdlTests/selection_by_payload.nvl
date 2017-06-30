@@ -1,5 +1,6 @@
-lat = location 41.185242
-lon = location(ask 'Longitude?') //-8.70701
+lat = Location.toRadians 41.185242
+input = ask 'Longitude?'
+lon = Location.toRadians input //-8.70701
 
 def loc = new Location(lat,lon)
 message loc

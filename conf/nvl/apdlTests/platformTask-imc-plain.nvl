@@ -3,7 +3,7 @@ APDL = location 41.18456, -8.70590
 v = pick { 
   type 'UUV'
   region APDL, 2.km
-  id 'lauv-seacon-1'
+  id 'lauv-noptilus-1'
 }
 
 // Execute IMC Plan designed in Neptus
