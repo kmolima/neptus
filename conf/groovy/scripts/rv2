@@ -1,0 +1,25 @@
+//----Parameters Definition-----
+
+def popDistance = 500 //in meters
+def plan1       = "survey2"   // already defined in the console
+def plan2       = "cmd-x8-02"     
+
+def initialPlan_uuv = new Plan(console,plans.get(plan1))
+
+def waypoints = initialPlan_uuv.waypoints()
+def lastWaypoint = waypoints[waypoints.size-1]
+
+def initialPlan_uav = new Plan(console,plans.get(plan2))
+def start = initialPlan_uav.initialLocation()
+
+int dist = ((int) start.distance(lastWaypoint) / 2 )
+println "Distance between UAV and UUV: "+dist+" meters"
+new Plan(console).with{
+	
+	planName "rendezVous2"
+	loiter location: midpoint(start,lastWaypoint,dist),
+	            duration:30, radius: 50
+	vehicles "x8-02"
+	addToConsole()
+}
+println "done"
