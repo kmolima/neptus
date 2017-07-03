@@ -83,7 +83,7 @@ public class DolphinConsolePanel extends ConsolePanel {
     private JTextArea output;
     private RSyntaxTextArea editor; 
     private File script;
-    private JButton select,execButton,stop,saveFile;
+    private JButton select,execButton,stop,saveFile,autoSave;
     private RTextScrollPane scroll;
     private SpinnerModel model = new SpinnerNumberModel(14, 2, 32, 1);     
     private JSpinner spinner = new JSpinner(model);
@@ -125,6 +125,19 @@ public class DolphinConsolePanel extends ConsolePanel {
                     script = fc.getSelectedFile();
                     FileUtil.saveToFile(script.getAbsolutePath(), editor.getText());
                 }
+
+            }
+        };
+        
+        Action autosaveAction = new AbstractAction(I18n.text(""), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/save.png", 16, 16)) {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(script!=null)
+                    FileUtil.saveToFile(script.getAbsolutePath(), editor.getText());
+                else
+                    saveAction.actionPerformed(e);
+                
 
             }
         };
@@ -201,6 +214,7 @@ public class DolphinConsolePanel extends ConsolePanel {
         stop       = new JButton(stopAction);
 //        stop.setEnabled(false);
         saveFile    = new JButton(saveAction);
+        autoSave    = new JButton(autosaveAction);
 
         JButton clear = new JButton(new AbstractAction(I18n.text("Clear Console")) {
 
@@ -222,6 +236,7 @@ public class DolphinConsolePanel extends ConsolePanel {
         spinner.setPreferredSize(new Dimension(65,35));
         //middle
         buttons.add(select);
+        buttons.add(autoSave);
         buttons.add(saveFile);
         buttons.add(execButton);
         buttons.add(stop);
