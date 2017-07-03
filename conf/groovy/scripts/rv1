@@ -18,8 +18,8 @@ new Plan(console).with{
 	
 	planName "rendezVous1"
 	loiter location: midpoint(start,lastWaypoint,dist),
-	            duration:30, radius: 50
-	vehicles "x8-02"
+	            duration:30, radius: 50//, payload: [[name: "Path control"]]
+	vehicles "X8-02"
 	addToConsole()
 }
 println "done"

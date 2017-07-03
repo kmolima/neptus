@@ -30,7 +30,7 @@
 // * Author: edrdo
 // * May 14, 2017
 // */
-package pt.lsts.neptus.plugins.nvl;
+package pt.lsts.neptus.pluginsdolphin;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -73,10 +73,10 @@ import pt.lsts.neptus.util.FileUtil;
 import pt.lsts.neptus.util.ImageUtils;
 
 
-@PluginDescription(name = "Dolphin Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/nvl/images/dolphin.png")
+@PluginDescription(name = "Dolphin Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/dolphin/images/dolphin.png")
 @Popup(pos = Popup.POSITION.BOTTOM_RIGHT, width=600, height=500)
 @SuppressWarnings("serial")
-public class NVLConsolePanel extends ConsolePanel {
+public class DolphinConsolePanel extends ConsolePanel {
 
     private Border border,fontBorder;
     private JScrollPane outputPanel;
@@ -88,7 +88,7 @@ public class NVLConsolePanel extends ConsolePanel {
     private SpinnerModel model = new SpinnerNumberModel(14, 2, 32, 1);     
     private JSpinner spinner = new JSpinner(model);
     
-    public NVLConsolePanel(ConsoleLayout layout) {
+    public DolphinConsolePanel(ConsoleLayout layout) {
         super(layout);
     }
 
@@ -102,8 +102,8 @@ public class NVLConsolePanel extends ConsolePanel {
         
         //Custom syntax highlight
         AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory)TokenMakerFactory.getDefaultInstance();
-        atmf.putMapping("text/nvl", "pt.lsts.neptus.plugins.nvl.HighlightSupport"); //NVLHighlightSupport.SYNTAX_STYLE_GROOVY
-        editor.setSyntaxEditingStyle("text/nvl");
+        atmf.putMapping("text/dolphin", "pt.lsts.neptus.plugins.dolphin.HighlightSupport"); //NVLHighlightSupport.SYNTAX_STYLE_GROOVY
+        editor.setSyntaxEditingStyle("text/dolphin");
         editor.setCodeFoldingEnabled(true);
         scroll = new RTextScrollPane(editor);
 
@@ -111,16 +111,16 @@ public class NVLConsolePanel extends ConsolePanel {
             editor.setText(FileUtil.getFileAsString(script));    
         }
 
-        Action saveAction = new AbstractAction(I18n.text("Save Script as"), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/nvl/images/save.png", 16, 16)) {
+        Action saveAction = new AbstractAction(I18n.text("Save Script as"), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/save.png", 16, 16)) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/nvl/apdlTests");
+                File directory = new File("conf/dolphin/apdlTests");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
                 // Demonstrate "Save" dialog:
-                int rVal = fc.showSaveDialog(NVLConsolePanel.this);
+                int rVal = fc.showSaveDialog(DolphinConsolePanel.this);
                 if (rVal == JFileChooser.APPROVE_OPTION) {
                     script = fc.getSelectedFile();
                     FileUtil.saveToFile(script.getAbsolutePath(), editor.getText());
@@ -129,15 +129,15 @@ public class NVLConsolePanel extends ConsolePanel {
             }
         };
 
-        Action selectAction = new AbstractAction(I18n.text("Script File..."), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/nvl/images/filenew.png", 16, 16)) {
+        Action selectAction = new AbstractAction(I18n.text("Script File..."), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/filenew.png", 16, 16)) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/nvl/apdlTests");
+                File directory = new File("conf/dolphin/apdlTests");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
-                int returnVal = fc.showOpenDialog(NVLConsolePanel.this);
+                int returnVal = fc.showOpenDialog(DolphinConsolePanel.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     script = fc.getSelectedFile();
                     if(fc.getSelectedFile().exists()){
@@ -179,7 +179,7 @@ public class NVLConsolePanel extends ConsolePanel {
         outputPanel.setBorder(border);
 
 
-        Action execAction = new AbstractAction(I18n.text("Execute"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/groovy/images/forward.png", 16, 16)) {
+        Action execAction = new AbstractAction(I18n.text("Execute"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/forward.png", 16, 16)) {
             @Override
             public void actionPerformed(ActionEvent e) {   
                 FileUtil.saveToFile(script.getAbsolutePath(), editor.getText());
@@ -187,7 +187,7 @@ public class NVLConsolePanel extends ConsolePanel {
             }
         };
 
-        Action stopAction = new AbstractAction(I18n.text("Stop "),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/groovy/images/stop.png", 16, 16)) {
+        Action stopAction = new AbstractAction(I18n.text("Stop "),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/stop.png", 16, 16)) {
             @Override
             public void actionPerformed(ActionEvent e) {   
                 output.append("Stopping script!\n");

@@ -30,7 +30,7 @@
  * Author: edrdo
  * May 16, 2017
  */
-package pt.lsts.neptus.plugins.nvl;
+package pt.lsts.neptus.pluginsdolphin;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -65,7 +65,7 @@ public enum NeptusPlatform implements Platform {
         return INSTANCE;
     }
 
-    private NVLConsolePanel consolePanel;
+    private DolphinConsolePanel consolePanel;
 
     private NeptusPlatform() {
         pt.lsts.nvl.util.Debug.enable();
@@ -74,7 +74,7 @@ public enum NeptusPlatform implements Platform {
         d("initialized");
     }
 
-    public void associateTo(NVLConsolePanel cp) {
+    public void associateTo(DolphinConsolePanel cp) {
         detach();
         d("attached to console");
         consolePanel = cp;
@@ -82,7 +82,7 @@ public enum NeptusPlatform implements Platform {
     }
 
 
-    private void refreshConsolePlans(NVLConsolePanel cp) {
+    private void refreshConsolePlans(DolphinConsolePanel cp) {
         imcPlanTasks.clear();
         for(PlanType plan: cp.getConsole().getMission().getIndividualPlansList().values()){
             //displayMessage("IMC plan available: %s", plan.getId());

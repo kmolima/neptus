@@ -5,7 +5,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Neptus/libJNI"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="plugins-dev/nvl_runtime"/>
+	<classpathentry kind="src" path="plugins-dev/dolphin"/>
 	<classpathentry kind="src" path="plugins-dev/groovy"/>
 	<classpathentry kind="src" output="build/tests" path="srcTests"/>
 	<classpathentry kind="src" path="plugins-dev/accu"/>
