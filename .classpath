@@ -255,7 +255,7 @@
 	<classpathentry kind="lib" path="lib/zxing-core-3.2.1.jar"/>
 	<classpathentry kind="lib" path="plugins-dev/shapefiles/lib/shapefilereader-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/opencv-2.4.11.jar"/>
-	<classpathentry kind="lib" path="plugins-dev/nvl_runtime/lib/nvl-neptus-0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/home/lsts/workspace/neptus-keila/plugins-dev/dolphin/lib/nvl-neptus-0.1-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
 	<classpathentry kind="lib" path="lib/groovy-all-2.4.11.jar"/>
 	<classpathentry kind="lib" path="lib/imc_plan_dsl.jar"/>
