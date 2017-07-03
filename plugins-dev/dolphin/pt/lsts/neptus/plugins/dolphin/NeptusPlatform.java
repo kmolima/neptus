@@ -180,7 +180,7 @@ public enum NeptusPlatform implements Platform {
     public void customizeGroovyCompilation(CompilerConfiguration cc) {
         displayMessage("Customizing compilation for Neptus runtime ...");
         ImportCustomizer ic = new ImportCustomizer();
-        ic.addStaticStars("pt.lsts.neptus.plugins.nvl.dsl.Instructions");
+        ic.addStaticStars("pt.lsts.neptus.plugins.dolphin.dsl.Instructions");
         ic.addStarImports("pt.lsts.imc.groovy.dsl");
         for (String msg : IMCDefinition.getInstance().getConcreteMessages()) {
           ic.addImports("pt.lsts.imc." + msg);
@@ -192,7 +192,7 @@ public enum NeptusPlatform implements Platform {
     public List<File> getExtensionFiles() {
         displayMessage("Configuring extension files ...");
         LinkedList<File> list = new LinkedList<>();
-        File dir = new File("conf/nvl/extensions");
+        File dir = new File("conf/dolphin/extensions");
         if (dir.isDirectory()) {
           for (String fileName : dir.list()) {
              if (fileName.endsWith(".groovy")) {
