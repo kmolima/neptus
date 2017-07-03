@@ -30,7 +30,7 @@
 // * Author: edrdo
 // * May 14, 2017
 // */
-package pt.lsts.neptus.pluginsdolphin;
+package pt.lsts.neptus.plugins.dolphin;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

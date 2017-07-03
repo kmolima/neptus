@@ -30,7 +30,7 @@
  * Author: keila
  * 08/03/2017
  */
-package pt.lsts.neptus.pluginsdolphin;
+package pt.lsts.neptus.dolphin.plugins;
 
 import java.util.ArrayList;
 import java.util.List;
