@@ -30,7 +30,7 @@
  * Author: edrdo
  * May 16, 2017
  */
-package pt.lsts.neptus.pluginsdolphin;
+package pt.lsts.neptus.dolphin.plugins;
 
 import java.io.File;
 import java.util.LinkedList;

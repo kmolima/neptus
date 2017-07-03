@@ -1,4 +1,4 @@
-package pt.lsts.neptus.pluginsdolphin;
+package pt.lsts.neptus.dolphin.plugins;
 //package pt.lsts.neptus.plugins.nvl_runtime;
 //
 //import java.awt.event.ActionEvent;

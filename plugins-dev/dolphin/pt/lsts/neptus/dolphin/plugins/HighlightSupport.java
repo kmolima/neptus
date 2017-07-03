@@ -30,7 +30,7 @@
  * Author: lsts
  * 13/06/2017
  */
-package pt.lsts.neptus.pluginsdolphin;
+package pt.lsts.neptus.dolphin.plugins;
 
 import javax.swing.text.Segment;
 
