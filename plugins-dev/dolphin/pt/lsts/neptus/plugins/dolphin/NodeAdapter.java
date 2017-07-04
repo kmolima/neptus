@@ -45,13 +45,13 @@ import pt.lsts.neptus.types.coord.LocationType;
 import pt.lsts.neptus.types.mission.plan.PlanCompatibility;
 import pt.lsts.neptus.types.vehicle.VehicleType.SystemTypeEnum;
 import pt.lsts.neptus.types.vehicle.VehiclesHolder;
-import pt.lsts.nvl.runtime.Node;
+import pt.lsts.nvl.runtime.AbstractNode;
 import pt.lsts.nvl.runtime.Payload;
 import pt.lsts.nvl.runtime.PayloadComponent;
 import pt.lsts.nvl.runtime.Position;
 import pt.lsts.nvl.runtime.tasks.Task;
 
-public class NodeAdapter implements Node {
+public class NodeAdapter extends AbstractNode {
 
     private final ImcSystem imcsystem;
     private final Payload availablePayload;
@@ -59,6 +59,7 @@ public class NodeAdapter implements Node {
     private Task runningTask;
 
     public NodeAdapter(ImcSystem imcData) {
+        super(imcData.getName());
         List<PayloadComponent> ps = new ArrayList<>();
         imcsystem = imcData;
         for(String payload : PlanCompatibility.availablePayloads(VehiclesHolder.getVehicleById(getId()))) {
@@ -88,10 +89,6 @@ public class NodeAdapter implements Node {
     }
 
 
-    @Override
-    public String getId() {
-        return imcsystem.getName();
-    }
 
     @Override
     public String getType() {
@@ -112,18 +109,6 @@ public class NodeAdapter implements Node {
 
     }
 
-    @Override
-    public Task getRunningTask() {
-        return runningTask;
-    }
-
-
-    @Override
-    public void setRunningTask(Task t) {
-        runningTask = t;
-    }
-
- 
     @Override
     public void release() {
         // Temporary workaround
