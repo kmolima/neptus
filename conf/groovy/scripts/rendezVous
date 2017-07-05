@@ -1,0 +1,35 @@
+//----Parameters Definition-----
+    
+(1..3).each{ index ->
+
+	def plan1 = "survey"+index   // already defined in the console
+	println "First Plan: "+plan1
+	
+	def initialPlan_uuv = new Plan(console,plans.get(plan1))
+	def waypoints = initialPlan_uuv.waypoints()
+	def lastWaypoint = waypoints[waypoints.size-1]
+	
+	def start = locations.get 'UAV_Barrel'
+	int dist  = ((int) start.distance(lastWaypoint))
+	println "Distance between UAV barrel and UUV: "+dist+" meters"
+	new Plan(console).with{
+		
+		planName "uav_rendezVous"+index
+		z 5.0,"HEIGHT"
+		loiter location: start,
+		            duration:150, radius: 50, 
+		                payload: [[name: "Path control"],[name: "Height control"]]
+		vehicles "X8-02"
+		addToConsole()
+	}
+	new Plan(console).with{
+		
+		planName "uuv_rendezVous"+index
+		int waypoint = ((int) dist/2)
+		skeeping location: midpoint(start,lastWaypoint,waypoint),
+		            duration:150
+		vehicles "lauv-noptilus-"+index
+		addToConsole()
+	}
+	println "done"
+}
