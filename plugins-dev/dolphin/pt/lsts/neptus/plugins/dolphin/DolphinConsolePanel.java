@@ -153,6 +153,8 @@ public class DolphinConsolePanel extends ConsolePanel {
                 int returnVal = fc.showOpenDialog(DolphinConsolePanel.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     script = fc.getSelectedFile();
+                    border = BorderFactory.createTitledBorder("Script "+FileUtil.getFileNameWithoutExtension(script)+" Output");
+                    outputPanel.setBorder(border);
                     if(fc.getSelectedFile().exists()){
                         NeptusLog.pub().info("Opening: " + script.getName() + "." + "\n");
                         editor.setText(FileUtil.getFileAsString(script));
