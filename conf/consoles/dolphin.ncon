@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <console name="Neptus Console" width="1282" height="1029" resizable="true" mission-file="../../missions/REP17/rep17.nmisz" main-vehicle="lauv-xplore-1">
-  <!-- Data saved on 2017-07-03T15:50:20.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
+  <!-- Data saved on 2017-07-05T15:11:39.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
   <mainpanel name="console main panel">
     <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1280" height="945">
       <properties>
@@ -147,7 +147,7 @@ altitude: ${EstimatedState.alt};
           <entry key="groovyScript">/home/lsts/workspace/neptus-keila/conf/groovy/scripts/locs</entry>
         </properties>
       </child>
-      <child class="pt.lsts.neptus.plugins.dolphin.DolphinConsolePanel" x="0" y="0" width="598" height="472">
+      <child class="pt.lsts.neptus.plugins.dolphin.DolphinConsolePanel" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
     </subpanel>
