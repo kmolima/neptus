@@ -120,7 +120,7 @@ public class DolphinConsolePanel extends ConsolePanel {
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
                 // Demonstrate "Save" dialog:
-                int rVal = fc.showSaveDialog(DolphinConsolePanel.this);
+                int rVal = fc.showDialog(DolphinConsolePanel.this,"Save file as...");
                 if (rVal == JFileChooser.APPROVE_OPTION) {
                     script = fc.getSelectedFile();
                     FileUtil.saveToFile(script.getAbsolutePath(), editor.getText());
@@ -146,7 +146,7 @@ public class DolphinConsolePanel extends ConsolePanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/dolphin/apdlTests");
+                File directory = new File("conf/dolphin/rep17");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
@@ -218,7 +218,7 @@ public class DolphinConsolePanel extends ConsolePanel {
         saveFile    = new JButton(saveAction);
         autoSave    = new JButton(autosaveAction);
 
-        JButton clear = new JButton(new AbstractAction(I18n.text("Clear Console")) {
+        JButton clear = new JButton(new AbstractAction(I18n.text("Clear Console"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/clear.png", 16, 16)) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -236,13 +236,19 @@ public class DolphinConsolePanel extends ConsolePanel {
         ((TitledBorder) fontBorder).setTitlePosition(TitledBorder.BOTTOM);
         spinner.setBorder(fontBorder); 
         spinner.setPreferredSize(new Dimension(65,35));
-        //middle
+        //middle section
         buttons.add(select);
         buttons.add(autoSave);
         buttons.add(saveFile);
         buttons.add(execButton);
         buttons.add(stop);
         buttons.add(spinner);
+        //onHover tool tip text
+        select.setToolTipText("Select File");
+        autoSave.setToolTipText("Save Current File Modifications");
+        spinner.setToolTipText("Adjust Editor's Font Size");
+        saveFile.setToolTipText("Save Current File as...");
+
         
         top.setPreferredSize(new Dimension(600, 350));
         top.add(buttons,BorderLayout.SOUTH);
