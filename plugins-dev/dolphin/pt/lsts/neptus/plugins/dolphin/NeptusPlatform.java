@@ -156,7 +156,9 @@ public enum NeptusPlatform implements Platform {
 
     @Override
     public void displayMessage(String fmt, Object... args) {
-      d(fmt, args);
+      //d(fmt, args);
+      String debug = String.format(fmt, args);
+      NeptusLog.pub().debug(debug);
       if (consolePanel != null) {
           consolePanel.displayMessage(fmt, args); 
       }

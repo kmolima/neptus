@@ -297,7 +297,7 @@ public class DolphinConsolePanel extends ConsolePanel {
         spinner.setToolTipText("Adjust Editor's Font Size");
         saveFile.setToolTipText("Save Current File as...");
         undo.setToolTipText("Ctrl+Z");
-        redo.setToolTipText("Ctrl+Shft+Z");
+        redo.setToolTipText("Ctrl+Y");
 
         
         top.setPreferredSize(new Dimension(600, 350));
