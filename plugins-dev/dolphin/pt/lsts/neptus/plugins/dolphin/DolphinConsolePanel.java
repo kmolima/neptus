@@ -55,18 +55,22 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.fife.ui.rtextarea.RUndoManager;
 
 
 import pt.lsts.neptus.NeptusLog;
 import pt.lsts.neptus.console.ConsoleLayout;
 import pt.lsts.neptus.console.ConsolePanel;
 import pt.lsts.neptus.i18n.I18n;
+import pt.lsts.neptus.plugins.NeptusProperty;
 import pt.lsts.neptus.plugins.PluginDescription;
 import pt.lsts.neptus.plugins.Popup;
 import pt.lsts.neptus.util.FileUtil;
@@ -83,10 +87,14 @@ public class DolphinConsolePanel extends ConsolePanel {
     private JTextArea output;
     private RSyntaxTextArea editor; 
     private File script;
-    private JButton select,execButton,stop,saveFile,autoSave;
+    private JButton select,execButton,stop,saveFile,autoSave,undo,redo;
     private RTextScrollPane scroll;
     private SpinnerModel model = new SpinnerNumberModel(14, 2, 32, 1);     
     private JSpinner spinner = new JSpinner(model);
+    private RUndoManager undoManager; 
+    
+    @NeptusProperty
+    File scriptDir = new File("conf/dolphin/");
     
     public DolphinConsolePanel(ConsoleLayout layout) {
         super(layout);
@@ -95,10 +103,19 @@ public class DolphinConsolePanel extends ConsolePanel {
 
     @Override
     public void initSubPanel() {
+        removeAll();
         NeptusPlatform.getInstance().associateTo(this);
         
         setLayout(new BorderLayout());
         editor = new RSyntaxTextArea();
+        undoManager   = new RUndoManager(editor);
+        editor.getDocument().addUndoableEditListener(new UndoableEditListener() {
+            
+            @Override
+            public void undoableEditHappened(UndoableEditEvent e) {
+                undoManager.addEdit(e.getEdit());                
+            }
+        });
         
         //Custom syntax highlight
         AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory)TokenMakerFactory.getDefaultInstance();
@@ -108,14 +125,15 @@ public class DolphinConsolePanel extends ConsolePanel {
         scroll = new RTextScrollPane(editor);
 
         if (script != null) {
-            editor.setText(FileUtil.getFileAsString(script));    
+            editor.setText(FileUtil.getFileAsString(script));
+            editor.discardAllEdits();
         }
 
         Action saveAction = new AbstractAction(I18n.text("Save Script as"), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/save.png", 16, 16)) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/dolphin/apdlTests");
+                File directory = scriptDir;//new File("conf/dolphin/apdlTests");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
@@ -146,7 +164,7 @@ public class DolphinConsolePanel extends ConsolePanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                File directory = new File("conf/dolphin/rep17");
+                File directory = scriptDir;//new File("conf/dolphin/rep17");
                 final JFileChooser fc = new JFileChooser(directory);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fc.setFileFilter( new FileNameExtensionFilter("NVL files","nvl"));
@@ -156,32 +174,25 @@ public class DolphinConsolePanel extends ConsolePanel {
                     border = BorderFactory.createTitledBorder("Script "+FileUtil.getFileNameWithoutExtension(script)+" Output");
                     outputPanel.setBorder(border);
                     if(fc.getSelectedFile().exists()){
-                        NeptusLog.pub().info("Opening: " + script.getName() + "." + "\n");
+                        NeptusLog.pub().info("Opening: " + script.getName() + "\n");
                         editor.setText(FileUtil.getFileAsString(script));
+                        editor.discardAllEdits();
                     }
                     else {
                         try {
                             if(script.createNewFile()){
 
                                 editor.setText(FileUtil.getFileAsString(script));
-                                NeptusLog.pub().info("Creating new script file: " + script.getName() + "." + "\n");                          }
+                                NeptusLog.pub().info("Creating new script file: " + script.getName() + "\n");                          }
                         }
                         catch(IOException e1){
-                            NeptusLog.pub().info("Error creating new script file.\n",e1);
+                            NeptusLog.pub().info("Error creating new script file\n",e1);
                         }
 
                     }
                 }
             }
         };
-        
-        ChangeListener listener = new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                    editor.setFont(new Font(Font.MONOSPACED, 0, (int) spinner.getValue()));
-                
-            }
-          };
         
         //Output panel
         output = new JTextArea();
@@ -193,7 +204,7 @@ public class DolphinConsolePanel extends ConsolePanel {
         outputPanel = new JScrollPane(output);
         outputPanel.setBorder(border);
 
-
+        // Buttons AbstractActions
         Action execAction = new AbstractAction(I18n.text("Execute"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/forward.png", 16, 16)) {
             @Override
             public void actionPerformed(ActionEvent e) {   
@@ -202,7 +213,7 @@ public class DolphinConsolePanel extends ConsolePanel {
             }
         };
 
-        Action stopAction = new AbstractAction(I18n.text("Stop "),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/stop.png", 16, 16)) {
+        Action stopAction = new AbstractAction(I18n.text("Stop"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/stop.png", 16, 16)) {
             @Override
             public void actionPerformed(ActionEvent e) {   
                 output.append("Stopping script!\n");
@@ -210,15 +221,38 @@ public class DolphinConsolePanel extends ConsolePanel {
                 NeptusPlatform.getInstance().stopExecution();
             }
         };
+        
+        Action undoAction = new AbstractAction(I18n.text(""),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/undo.png", 16, 16)) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(undoManager.canUndo())
+                    undoManager.undo();
+                else
+                    NeptusLog.pub().error("Unnable to undo typing at Dolphin editor");
+            }
+        };
+        
+        
+        Action redoAction = new AbstractAction(I18n.text(""),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/redo.png", 16, 16)) {
+            @Override
+            public void actionPerformed(ActionEvent e) {   
+                if(undoManager.canRedo())
+                    undoManager.redo();
+                else
+                    NeptusLog.pub().error("Unnable to redo typing at Dolphin editor");
+            }
+        };
+        
         //Buttons
         execButton = new JButton(execAction);
         select     = new JButton(selectAction);
         stop       = new JButton(stopAction);
-//        stop.setEnabled(false);
-        saveFile    = new JButton(saveAction);
-        autoSave    = new JButton(autosaveAction);
+        saveFile   = new JButton(saveAction);
+        autoSave   = new JButton(autosaveAction);
+        undo       = new JButton(undoAction);
+        redo       = new JButton(redoAction);
 
-        JButton clear = new JButton(new AbstractAction(I18n.text("Clear Console"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/clear.png", 16, 16)) {
+        JButton clear = new JButton(new AbstractAction(I18n.text("Clear Output"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/dolphin/images/clear.png", 16, 16)) {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -231,11 +265,22 @@ public class DolphinConsolePanel extends ConsolePanel {
         JPanel top = new JPanel(new BorderLayout());
         JPanel buttons = new JPanel();
         
+        
+        //Font size spinner
+        ChangeListener listener = new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                    editor.setFont(new Font(Font.MONOSPACED, 0, (int) spinner.getValue()));
+                
+            }
+          };        
         spinner.addChangeListener(listener);
         fontBorder = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),"Font");
         ((TitledBorder) fontBorder).setTitlePosition(TitledBorder.BOTTOM);
         spinner.setBorder(fontBorder); 
         spinner.setPreferredSize(new Dimension(65,35));
+        
+        
         //middle section
         buttons.add(select);
         buttons.add(autoSave);
@@ -243,11 +288,16 @@ public class DolphinConsolePanel extends ConsolePanel {
         buttons.add(execButton);
         buttons.add(stop);
         buttons.add(spinner);
+        buttons.add(undo);
+        buttons.add(redo);
+        
         //onHover tool tip text
         select.setToolTipText("Select File");
-        autoSave.setToolTipText("Save Current File Modifications");
+        autoSave.setToolTipText("Save Current File Changes");
         spinner.setToolTipText("Adjust Editor's Font Size");
         saveFile.setToolTipText("Save Current File as...");
+        undo.setToolTipText("Ctrl+Z");
+        redo.setToolTipText("Ctrl+Shft+Z");
 
         
         top.setPreferredSize(new Dimension(600, 350));
