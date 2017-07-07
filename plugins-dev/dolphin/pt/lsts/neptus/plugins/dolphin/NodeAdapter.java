@@ -49,14 +49,14 @@ import pt.lsts.nvl.runtime.AbstractNode;
 import pt.lsts.nvl.runtime.Payload;
 import pt.lsts.nvl.runtime.PayloadComponent;
 import pt.lsts.nvl.runtime.Position;
-import pt.lsts.nvl.runtime.tasks.Task;
+//import pt.lsts.nvl.runtime.tasks.Task;
 
 public class NodeAdapter extends AbstractNode {
 
     private final ImcSystem imcsystem;
     private final Payload availablePayload;
     private final String  acousticOPservice="acoustic/operation";
-    private Task runningTask;
+    //private Task runningTask;
 
     public NodeAdapter(ImcSystem imcData) {
         super(imcData.getName());

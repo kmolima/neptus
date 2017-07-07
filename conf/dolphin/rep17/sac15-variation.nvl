@@ -1,8 +1,11 @@
-// SAC'15 scenario revisited
+// SAC'15 scenario revisited 
+//38.43461666666666 -8.861177777777778 : Comporta Op Area location
 uuv1 = pick { type 'UUV' }
 uuv2 = pick { type 'UUV' }
 uuv3 = pick { type 'UUV' }
 uav = pick { type 'UAV' }
+
+ setConnectionTimeout  180.0
 
 execute uuv1: 
           imcPlan('survey1') >> 

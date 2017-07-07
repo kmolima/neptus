@@ -22,6 +22,8 @@ conf/params/manta*.xml
 conf/dolphin/extensions/*
 conf/dolphin/apdlTests/*
 conf/dolphin/apdlTests/FailureTests
+conf/dolphin/rep17/*
+conf/dolphin/rep17/FailureTests/*
 conf/groovy/scripts/*
 vehicles-defs/*-lauv-simulator-*.nvcl
 conf/params/lauv-simulator*.xml

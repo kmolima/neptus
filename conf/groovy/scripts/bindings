@@ -25,5 +25,6 @@ if(locations!=null) {
 	}
 		
 
-
+println Location.toDeg(0.6708106075752212)+" "+ Location.toDeg(-0.15465672782677664)
+38.43461666666666 -8.861177777777778
 
