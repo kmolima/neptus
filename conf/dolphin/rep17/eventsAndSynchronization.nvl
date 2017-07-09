@@ -4,7 +4,7 @@ slave1 = pick { type 'UUV' }
 slave2 = pick { type 'UUV' }
  
  
- setConnectionTimeout  120.0 
+setConnectionTimeout  120.0 
  
 execute master : 
              imcPlan('plan1') >> 
@@ -13,10 +13,10 @@ execute master :
              action { post x:2 },
         slave1:
              condition { consume x: 1} >>
-             imcPlan('survey1'),
+             imcPlan('survey4'),
         slave2: 
              condition { consume x: 2} >>
-             imcPlan('survey2')
+             imcPlan('survey5')
 
 
             

@@ -11,8 +11,8 @@
  survey3 = imcPlan('survey3') >>  action { post ready:3 }
  
  rendezVous   = condition{consume ready:3} >> imcPlan('rv3')
- rendezVous1  = imcPlan('rv1') //imcPlan('rv1_survey1') | imcPlan('rv1')
- rendezVous2  = imcPlan('rv2') //imcPlan('rv2_survey2') | imcPlan('rv2')
+ rendezVous1  = imcPlan('rendezVous1_np2') //imcPlan('rv1_survey1') | imcPlan('rv1')
+ rendezVous2  = imcPlan('rendezVous2_np2') //imcPlan('rv2_survey2') | imcPlan('rv2')
  
 execute  (survey1 | survey2) >>  choose{
                   when {consume ready:1} then action{ post ready:22 } >> survey3 >> action{ post ready:13 }

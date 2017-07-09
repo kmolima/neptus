@@ -3,7 +3,7 @@
 ComportaOParea = location 38.43461, -8.86117
 v = pick { 
   type 'UUV'
-  region ComportaOParea, 2.km
+  region ComportaOParea, 5.km
   id 'lauv-noptilus-1'
 }
 

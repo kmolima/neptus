@@ -1,15 +1,15 @@
 // Pick an UUV ---- ~ 38.43461666666666 -8.861177777777778 : Comporta Op Area location
 
- setConnectionTimeout  120.0
+setConnectionTimeout  120.0
 
 ComportaOpArea = location 38.425711111111106, -8.852072222222223
 v = pick { 
   type 'UUV'
-  region ComportaOpArea, 2.km
+  region ComportaOpArea, 5.km
   id 'lauv-noptilus-1'
 }
 // IMC plan defined programatically
-t2 = imcPlan {
+task = imcPlan {
     planName 'imc-dsl-plan'
     speed 1.5, Speed.Units.METERS_PS
     z     0.0, Z.Units.DEPTH
@@ -19,8 +19,4 @@ t2 = imcPlan {
     move 0,-50
     loiter()
 }
- v:t2
-
-// Execute IMC Plan designed in Neptus
-//t1 = imcPlan 'Operator_Plan' 
-//execute v:t1
+ execute v:task

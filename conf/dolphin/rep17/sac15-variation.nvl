@@ -5,7 +5,7 @@ uuv2 = pick { type 'UUV' }
 uuv3 = pick { type 'UUV' }
 uav = pick { type 'UAV' }
 
- setConnectionTimeout  180.0
+setConnectionTimeout  180.0
 
 execute uuv1: 
           imcPlan('survey1') >> 

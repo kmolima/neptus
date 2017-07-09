@@ -4,7 +4,7 @@
 n = ask 'How many vehicles?' 
 uuvs = pick {
 	type 'UUV'
-	timeout 15.seconds
+	timeout 20.seconds
 	count n
 	}
 	
