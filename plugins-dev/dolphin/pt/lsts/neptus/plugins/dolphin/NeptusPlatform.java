@@ -50,10 +50,10 @@ import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.comm.manager.imc.ImcSystem;
 import pt.lsts.neptus.comm.manager.imc.ImcSystemsHolder;
 import pt.lsts.neptus.types.mission.plan.PlanType;
-import pt.lsts.nvl.dsl.Engine;
-import pt.lsts.nvl.runtime.EnvironmentException;
-import pt.lsts.nvl.runtime.NodeSet;
-import pt.lsts.nvl.runtime.Platform;
+import pt.lsts.dolphin.dsl.Engine;
+import pt.lsts.dolphin.runtime.EnvironmentException;
+import pt.lsts.dolphin.runtime.NodeSet;
+import pt.lsts.dolphin.runtime.Platform;
 
 public enum NeptusPlatform implements Platform {
     INSTANCE;
@@ -68,7 +68,7 @@ public enum NeptusPlatform implements Platform {
     private DolphinConsolePanel consolePanel;
 
     private NeptusPlatform() {
-        pt.lsts.nvl.util.Debug.enable();
+        pt.lsts.dolphin.util.Debug.enable();
         Engine.create(this);
         consolePanel = null;
         d("initialized");

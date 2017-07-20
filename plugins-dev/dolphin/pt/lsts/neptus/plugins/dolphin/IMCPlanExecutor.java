@@ -37,8 +37,8 @@ import pt.lsts.imc.PlanControlState;
 import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.messages.listener.MessageInfo;
 import pt.lsts.neptus.messages.listener.MessageListener;
-import pt.lsts.nvl.dsl.Engine;
-import pt.lsts.nvl.imc.AbstractIMCPlanExecutor;
+import pt.lsts.dolphin.dsl.Engine;
+import pt.lsts.dolphin.imc.AbstractIMCPlanExecutor;
 
 
 public final class IMCPlanExecutor extends AbstractIMCPlanExecutor {

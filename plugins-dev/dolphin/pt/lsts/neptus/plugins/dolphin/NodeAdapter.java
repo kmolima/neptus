@@ -45,10 +45,10 @@ import pt.lsts.neptus.types.coord.LocationType;
 import pt.lsts.neptus.types.mission.plan.PlanCompatibility;
 import pt.lsts.neptus.types.vehicle.VehicleType.SystemTypeEnum;
 import pt.lsts.neptus.types.vehicle.VehiclesHolder;
-import pt.lsts.nvl.runtime.AbstractNode;
-import pt.lsts.nvl.runtime.Payload;
-import pt.lsts.nvl.runtime.PayloadComponent;
-import pt.lsts.nvl.runtime.Position;
+import pt.lsts.dolphin.runtime.AbstractNode;
+import pt.lsts.dolphin.runtime.Payload;
+import pt.lsts.dolphin.runtime.PayloadComponent;
+import pt.lsts.dolphin.runtime.Position;
 //import pt.lsts.nvl.runtime.tasks.Task;
 
 public class NodeAdapter extends AbstractNode {
