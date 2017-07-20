@@ -34,7 +34,7 @@ package pt.lsts.neptus.plugins.dolphin;
 
 
 import pt.lsts.imc.PlanSpecification;
-import pt.lsts.nvl.imc.AbstractIMCPlanTask;
+import pt.lsts.dolphin.imc.AbstractIMCPlanTask;
 
 public final class IMCPlanTask extends AbstractIMCPlanTask implements Cloneable {
     

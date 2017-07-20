@@ -1,8 +1,8 @@
 package pt.lsts.neptus.plugins.dolphin.dsl
 
 import pt.lsts.imc.IMCMessage
-import pt.lsts.nvl.runtime.NodeSet
-import pt.lsts.nvl.runtime.Node
+import pt.lsts.dolphin.runtime.NodeSet
+import pt.lsts.dolphin.runtime.Node
 import pt.lsts.neptus.comm.manager.imc.ImcMsgManager
 import pt.lsts.neptus.plugins.dolphin.*
 import pt.lsts.neptus.types.mission.plan.PlanType

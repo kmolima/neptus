@@ -54,6 +54,7 @@ import pt.lsts.dolphin.dsl.Engine;
 import pt.lsts.dolphin.runtime.EnvironmentException;
 import pt.lsts.dolphin.runtime.NodeSet;
 import pt.lsts.dolphin.runtime.Platform;
+import pt.lsts.dolphin.runtime.tasks.PlatformTask;
 
 public enum NeptusPlatform implements Platform {
     INSTANCE;
@@ -144,7 +145,7 @@ public enum NeptusPlatform implements Platform {
     }
     
     @Override
-    public IMCPlanTask getPlatformTask(String id) {
+    public PlatformTask getPlatformTask(String id) {
         refreshConsolePlans(consolePanel);
         IMCPlanTask task = imcPlanTasks.get(id);
         if (task == null) {
