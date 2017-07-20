@@ -40,10 +40,17 @@ import pt.lsts.neptus.messages.listener.MessageListener;
 import pt.lsts.dolphin.dsl.Engine;
 import pt.lsts.dolphin.imc.AbstractIMCPlanExecutor;
 
-
+/**
+ * Dolphin Task Executor
+ * Controls execution of each task
+ *
+ */
 public final class IMCPlanExecutor extends AbstractIMCPlanExecutor {
 
-    
+    /**
+     * Message Listener for PlanControlState Messages 
+     * 
+     */
     private final MessageListener<MessageInfo, IMCMessage> pcsListener = 
             (info, message) -> { 
                 if(Engine.getInstance().isScriptRunning()){

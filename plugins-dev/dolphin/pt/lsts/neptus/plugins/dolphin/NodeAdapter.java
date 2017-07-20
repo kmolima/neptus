@@ -51,13 +51,22 @@ import pt.lsts.dolphin.runtime.PayloadComponent;
 import pt.lsts.dolphin.runtime.Position;
 //import pt.lsts.nvl.runtime.tasks.Task;
 
+/**
+ * Node implementation at Neptus
+ * Using pt.lsts.neptus.comm.manager.imc.ImcSystem information to build a Dolphin Node 
+ */
 public class NodeAdapter extends AbstractNode {
 
     private final ImcSystem imcsystem;
     private final Payload availablePayload;
     private final String  acousticOPservice="acoustic/operation";
     //private Task runningTask;
-
+    
+    
+    /**
+     * Building Node specification including payload capabilities
+     * @param imcData system data
+     */
     public NodeAdapter(ImcSystem imcData) {
         super(imcData.getName());
         List<PayloadComponent> ps = new ArrayList<>();
@@ -76,7 +85,11 @@ public class NodeAdapter extends AbstractNode {
         }
         availablePayload = new Payload(ps);
     }
-
+    
+    /**
+     * Verifies if Node has acoustic service
+     * @return
+     */
     private boolean hasAcoustics(){
         PlanManeuver p = new PlanManeuver();
         p.setStartActions(null);
