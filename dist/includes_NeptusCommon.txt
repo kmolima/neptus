@@ -19,11 +19,8 @@ conf/i18n/**/*.po
 conf/neptus-coordinateSystems.xml
 conf/neptus-misc-systems.xml
 conf/params/manta*.xml
-conf/dolphin/extensions/*
-conf/dolphin/apdlTests/*
-conf/dolphin/apdlTests/FailureTests
-conf/dolphin/rep17/*
-conf/dolphin/rep17/FailureTests/*
+conf/dolphin/extensions/*.groovy
+conf/dolphin/*.nvl
 conf/groovy/scripts/*
 vehicles-defs/*-lauv-simulator-*.nvcl
 conf/params/lauv-simulator*.xml
