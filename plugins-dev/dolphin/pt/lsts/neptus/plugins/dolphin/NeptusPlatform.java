@@ -146,7 +146,7 @@ public enum NeptusPlatform implements Platform {
     
     
     /**
-     * Saves a IMC plan specification as an Neptus plan in the console if it is currently open/defined
+     * Saves a IMC plan specification as an Neptus plan in the console if it is currently open/defined.
      * @param ps IMC plan specification
      */
     public void storeInConsole(PlanSpecification ps){
@@ -186,7 +186,7 @@ public enum NeptusPlatform implements Platform {
     }
     
     /**
-     * Executes current Dolphin's program file open in the plugin's text editor 
+     * Executes current Dolphin's program file open in the plugin's text editor. 
      * @param scriptFile the current file
      */
     public void run(File scriptFile) {
@@ -199,8 +199,8 @@ public enum NeptusPlatform implements Platform {
     }
     
     /**
-     * Stops the execution of a Dolphin program if there's any program running
-     * Default behavior is to send abort to all bounded Nodes
+     * Stops the execution of a Dolphin program if there's any program running.
+     * Default behavior is to send abort to all bounded Nodes.
      */
     public void stopExecution() {
        Engine.getInstance().stopExecution(); 
