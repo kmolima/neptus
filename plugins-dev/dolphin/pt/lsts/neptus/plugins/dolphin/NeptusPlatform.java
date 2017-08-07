@@ -50,11 +50,17 @@ import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.comm.manager.imc.ImcSystem;
 import pt.lsts.neptus.comm.manager.imc.ImcSystemsHolder;
 import pt.lsts.neptus.types.mission.plan.PlanType;
-import pt.lsts.nvl.dsl.Engine;
-import pt.lsts.nvl.runtime.EnvironmentException;
-import pt.lsts.nvl.runtime.NodeSet;
-import pt.lsts.nvl.runtime.Platform;
+import pt.lsts.dolphin.dsl.Engine;
+import pt.lsts.dolphin.runtime.EnvironmentException;
+import pt.lsts.dolphin.runtime.NodeSet;
+import pt.lsts.dolphin.runtime.Platform;
+import pt.lsts.dolphin.runtime.tasks.PlatformTask;
 
+/**
+ * Singleton Platform instance for Dolphin Language Runtime
+ * @author lsts
+ *
+ */
 public enum NeptusPlatform implements Platform {
     INSTANCE;
 
@@ -68,12 +74,16 @@ public enum NeptusPlatform implements Platform {
     private DolphinConsolePanel consolePanel;
 
     private NeptusPlatform() {
-        pt.lsts.nvl.util.Debug.enable();
+        pt.lsts.dolphin.util.Debug.enable();
         Engine.create(this);
         consolePanel = null;
         d("initialized");
     }
-
+    
+    /**
+     * Associates Platform to a console currently open
+     * @param cp Neptus Console
+     */
     public void associateTo(DolphinConsolePanel cp) {
         detach();
         d("attached to console");
@@ -81,7 +91,11 @@ public enum NeptusPlatform implements Platform {
         refreshConsolePlans(cp); 
     }
 
-
+    
+    /**
+     * Upload current plans from the console, keeping the list of plans up to date 
+     * @param cp
+     */
     private void refreshConsolePlans(DolphinConsolePanel cp) {
         imcPlanTasks.clear();
         for(PlanType plan: cp.getConsole().getMission().getIndividualPlansList().values()){
@@ -89,7 +103,9 @@ public enum NeptusPlatform implements Platform {
             imcPlanTasks.put(plan.getId(), new IMCPlanTask((PlanSpecification) plan.asIMCPlan(true)));
         }
     }
-
+    /**
+     * Detaches current console from this Platform
+     */
     public void detach() {
         imcPlanTasks.clear();
         if (consolePanel != null) {
@@ -128,6 +144,11 @@ public enum NeptusPlatform implements Platform {
 //
 //    }
     
+    
+    /**
+     * Saves a IMC plan specification as an Neptus plan in the console if it is currently open/defined.
+     * @param ps IMC plan specification
+     */
     public void storeInConsole(PlanSpecification ps){
         
         if(consolePanel!=null){
@@ -144,7 +165,7 @@ public enum NeptusPlatform implements Platform {
     }
     
     @Override
-    public IMCPlanTask getPlatformTask(String id) {
+    public PlatformTask getPlatformTask(String id) {
         refreshConsolePlans(consolePanel);
         IMCPlanTask task = imcPlanTasks.get(id);
         if (task == null) {
@@ -163,7 +184,11 @@ public enum NeptusPlatform implements Platform {
           consolePanel.displayMessage(fmt, args); 
       }
     }
-
+    
+    /**
+     * Executes current Dolphin's program file open in the plugin's text editor. 
+     * @param scriptFile the current file
+     */
     public void run(File scriptFile) {
         if (scriptFile.exists()) {
             if(consolePanel!=null)
@@ -173,9 +198,12 @@ public enum NeptusPlatform implements Platform {
         }
     }
     
+    /**
+     * Stops the execution of a Dolphin program if there's any program running.
+     * Default behavior is to send abort to all bounded Nodes.
+     */
     public void stopExecution() {
        Engine.getInstance().stopExecution(); 
-       //TODO invoke IMCPlanExecutor.teardown() somehow 
     }  
 
     @Override

@@ -30,6 +30,7 @@
 // * Author: edrdo
 // * May 14, 2017
 // */
+
 package pt.lsts.neptus.plugins.dolphin;
 
 import java.awt.BorderLayout;
@@ -77,6 +78,9 @@ import pt.lsts.neptus.util.FileUtil;
 import pt.lsts.neptus.util.ImageUtils;
 
 
+/**
+ * Neptus Console for Dolphin language (GUI to edit and run programs)
+ */
 @PluginDescription(name = "Dolphin Runtime Feature", author = "Keila Lima",icon="pt/lsts/neptus/plugins/dolphin/images/dolphin.png")
 @Popup(pos = Popup.POSITION.BOTTOM_RIGHT, width=600, height=500)
 @SuppressWarnings("serial")
@@ -100,7 +104,9 @@ public class DolphinConsolePanel extends ConsolePanel {
         super(layout);
     }
 
-
+    /**
+     * Console configuration: editor, output panel, buttons and font size spinner
+     */
     @Override
     public void initSubPanel() {
         removeAll();
@@ -327,7 +333,12 @@ public class DolphinConsolePanel extends ConsolePanel {
 
     }*/
 
-
+    /**
+     * Method to display relevant debug/error/information messages from Dolphin Language
+     * printf format string
+     * @param fmt String format 
+     * @param args arguments to @param fmt
+     */
     public void displayMessage(String fmt, Object[] args) {
 
         if(output!=null){
@@ -340,8 +351,8 @@ public class DolphinConsolePanel extends ConsolePanel {
 
 
     /**
-     * @param prompt
-     * @return
+     * @param prompt message to be displayed on the popup dialog
+     * @return input from user
      */
     public String askForInput(String prompt) {
         String result = JOptionPane.showInputDialog(this, prompt);

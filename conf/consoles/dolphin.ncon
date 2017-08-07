@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <console name="Neptus Console" width="1366" height="743" resizable="true" mission-file="../../missions/REP17/rep17.nmisz" main-vehicle="lauv-xplore-2">
   <!-- Data saved on 2017-07-13T09:01:19.0Z with Neptus version 2017.06.1-dev (compiled on 2017-07-11, gneptus-2016.10.0-1176-g81c1ddc-dirty). -->
   <mainpanel name="console main panel">
     <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1364" height="660">
+=======
+<console name="Neptus Console" width="1282" height="1029" resizable="true" mission-file="../../missions/REP17/rep17.nmisz" main-vehicle="lauv-noptilus-2">
+  <!-- Data saved on 2017-07-20T15:52:40.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
+  <mainpanel name="console main panel">
+    <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1280" height="945">
+>>>>>>> db9d259a5296d0668392b44166b6230d78abe96c
       <properties>
         <entry key="XML Definitions">&lt;profiles&gt;
   &lt;profile name="Normal"&gt;
@@ -87,10 +94,14 @@
       <child class="pt.lsts.neptus.plugins.map.MapEditor" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
+<<<<<<< HEAD
       <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="1058" height="660">
+=======
+      <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="974" height="945">
+>>>>>>> db9d259a5296d0668392b44166b6230d78abe96c
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.console.plugins.planning.MissionTreePanel" x="0" y="162" width="294" height="492">
+      <child class="pt.lsts.neptus.console.plugins.planning.MissionTreePanel" x="0" y="162" width="294" height="777">
         <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.planning.MultiVehiclePlanOverlay" x="0" y="0" width="0" height="0">
@@ -149,9 +160,13 @@ altitude: ${EstimatedState.alt};
           <entry key="groovyScript">/home/keila/workspace/neptus-keila/conf/groovy/scripts/rendezVous</entry>
         </properties>
       </child>
+<<<<<<< HEAD
       <child class="pt.lsts.neptus.plugins.dolphin.DolphinConsolePanel" x="0" y="0" width="0" height="0">
+=======
+      <child class="pt.lsts.neptus.plugins.dolphin.DolphinConsolePanel" x="0" y="0" width="598" height="472">
+>>>>>>> db9d259a5296d0668392b44166b6230d78abe96c
         <properties>
-          <entry key="scriptDir">/home/keila/workspace/neptus-keila/conf/dolphin/rep17</entry>
+          <entry key="scriptDir">/home/lsts/workspace/neptus-keila/conf/dolphin/rep17</entry>
         </properties>
       </child>
       <child class="pt.lsts.neptus.plugins.sunfish.IridiumComms" x="0" y="0" width="0" height="0">
