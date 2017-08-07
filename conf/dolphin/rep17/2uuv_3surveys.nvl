@@ -5,7 +5,7 @@ survey_uuvs = pick { type 'UUV'
                        }
 gateway = pick { type 'UUV' }
 
- setConnectionTimeout  120.0
+setConnectionTimeout  5.minutes
 
 //Tasks:
 survey1 = imcPlan('survey1') >>  action { post ready:1 }

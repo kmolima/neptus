@@ -1,14 +1,12 @@
 
-pause 15.seconds
-
 uuv = pick {
 
 type 'UUV'
-id   'lauv-noptilus-3'
-payload 'sidescan'
+id   'lauv-noptilus-2'
+payload 'Multibeam'
 }
 
 
-message 'Selected UUV $uuv'
+message "Selected UUV $uuv"
 
-execute uav: imcPlan 'test'
+//execute uuv: imcPlan 'test'

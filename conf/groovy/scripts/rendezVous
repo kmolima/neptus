@@ -9,24 +9,26 @@
 	def waypoints = initialPlan_uuv.waypoints()
 	def lastWaypoint = waypoints[waypoints.size-1]
 	
-	def start = locations.get 'UAV_Barrel'
-	int dist  = ((int) start.distance(lastWaypoint))
+	def startPoint = locations.get 'UAV_BaseStation'
+	int dist  = ((int) startPoint.distance(lastWaypoint)*0.75)
+	
 	println "Distance between UAV barrel and UUV: "+dist+" meters"
 	new Plan(console).with{
 		
 		planName "uav_rendezVous"+index
-		z 5.0,"HEIGHT"
-		loiter location: start,
-		            duration:150, radius: 50, 
-		                payload: [[name: "Path control"],[name: "Height control"]]
-		vehicles "X8-02"
+		def waypoint = midpoint(startPoint,lastWaypoint,dist)
+		z 200.0,"HEIGHT"
+		loiter location: waypoint,
+		            duration:150, radius: 100, 
+		                payload: [[name: "Path Control"],[name: "Height Control"],[name: "Autopilot",Active: "false"]]
+		vehicles "x8-03"
 		addToConsole()
 	}
 	new Plan(console).with{
 		
 		planName "uuv_rendezVous"+index
-		int waypoint = ((int) dist/2)
-		skeeping location: midpoint(start,lastWaypoint,waypoint),
+		def waypoint = midpoint(startPoint,lastWaypoint,dist)
+		skeeping location: waypoint,
 		            duration:150
 		vehicles "lauv-noptilus-"+index
 		addToConsole()

@@ -1,9 +1,5 @@
 //----Parameters Definition-----
-def plan2       = "cmd-x8-03"  // already defined in the console
-def initialPlan_uav = new Plan(console,plans.get(plan2))
-def start = initialPlan_uav.initialLocation()
-
-//locations.get 'UAV_BaseStation'
+def start = locations.get 'UAV_BaseStation'
 
 (1..3).each{ index ->
 	def plan1       = "survey"+index
@@ -11,14 +7,13 @@ def start = initialPlan_uav.initialLocation()
 	def waypoints = initialPlan_uuv.waypoints()
 	def lastWaypoint = waypoints[waypoints.size-1]
 	
-	int dist = ((int) start.distance(lastWaypoint) / 2 )
 	println "Distance between UAV Base station and UUV: "+dist+" meters"
 	new Plan(console).with{
 		
 		planName "rv"+index
-		loiter location: midpoint(start,lastWaypoint,dist),
-		            duration:60, radius: 50, payload: [[name: "Path control"],[name: "Height Control"]]
-		vehicles "X8-03"
+		loiter location: lastWaypoint,
+		            duration:180, radius: 70, payload: [[name: "Path control"],[name: "Height Control"]]
+		vehicles "x8-03"
 		addToConsole()
 	}
 }

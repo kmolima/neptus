@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<console name="Neptus Console" width="1368" height="743" resizable="true" mission-file="../../missions/REP17/rep17.nmisz" main-vehicle="lauv-noptilus-2">
-  <!-- Data saved on 2017-07-09T03:03:07.0Z with Neptus version @VERSION@ (compiled on @DATE@, g@SCM_REV@). -->
+<console name="Neptus Console" width="1366" height="743" resizable="true" mission-file="../../missions/REP17/rep17.nmisz" main-vehicle="lauv-xplore-2">
+  <!-- Data saved on 2017-07-13T09:01:19.0Z with Neptus version 2017.06.1-dev (compiled on 2017-07-11, gneptus-2016.10.0-1176-g81c1ddc-dirty). -->
   <mainpanel name="console main panel">
-    <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1366" height="660">
+    <subpanel class="pt.lsts.neptus.console.plugins.containers.MigLayoutContainer" x="0" y="0" width="1364" height="660">
       <properties>
         <entry key="XML Definitions">&lt;profiles&gt;
   &lt;profile name="Normal"&gt;
@@ -33,7 +33,7 @@
       <child class="pt.lsts.neptus.plugins.acoustic.SimpleAbortModemRequest" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.plugins.acoustic.MantaOperations" x="0" y="0" width="0" height="0">
+      <child class="pt.lsts.neptus.plugins.acoustic.MantaOperations" x="0" y="0" width="348" height="223">
         <properties>
           <entry key="Systems listing">benthos2,benthos3,benthos4,benthos5,lauv-noptilus-1,lauv-noptilus-2,lauv-noptilus-3,lauv-xplore-1,lauv-xplore-2,lauv-xtreme-2,manta-1,manta-2,manta-11,manta-12,manta-21,manta-rugged</entry>
         </properties>
@@ -50,7 +50,7 @@
       <child class="pt.lsts.neptus.plugins.position.ContactMarker" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.controllers.ControllerPanel" x="0" y="0" width="300" height="200">
+      <child class="pt.lsts.neptus.controllers.ControllerPanel" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.EntityStatePanel" x="0" y="0" width="0" height="0">
@@ -87,7 +87,7 @@
       <child class="pt.lsts.neptus.plugins.map.MapEditor" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="1060" height="660">
+      <child class="pt.lsts.neptus.console.plugins.planning.MapPanel" x="0" y="0" width="1058" height="660">
         <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.planning.MissionTreePanel" x="0" y="162" width="294" height="492">
@@ -109,7 +109,9 @@
         <properties/>
       </child>
       <child class="pt.lsts.neptus.console.plugins.planning.PlanEditor" x="0" y="0" width="0" height="0">
-        <properties/>
+        <properties>
+          <entry key="Show Depth Profile">true</entry>
+        </properties>
       </child>
       <child class="pt.lsts.neptus.console.plugins.PlanExporter" x="0" y="0" width="0" height="0">
         <properties/>
@@ -142,17 +144,41 @@ altitude: ${EstimatedState.alt};
       <child class="pt.lsts.neptus.console.plugins.planning.MultiVehiclePlanner" x="0" y="0" width="0" height="0">
         <properties/>
       </child>
-      <child class="pt.lsts.neptus.plugins.groovy.GroovyPanel" x="0" y="0" width="498" height="573">
+      <child class="pt.lsts.neptus.plugins.groovy.GroovyPanel" x="0" y="0" width="0" height="0">
         <properties>
-          <entry key="groovyScript">/home/keila/workspace/neptus-keila/conf/groovy/scripts/rv</entry>
+          <entry key="groovyScript">/home/keila/workspace/neptus-keila/conf/groovy/scripts/rendezVous</entry>
         </properties>
       </child>
-      <child class="pt.lsts.neptus.plugins.dolphin.DolphinConsolePanel" x="0" y="0" width="598" height="473">
+      <child class="pt.lsts.neptus.plugins.dolphin.DolphinConsolePanel" x="0" y="0" width="0" height="0">
         <properties>
           <entry key="scriptDir">/home/keila/workspace/neptus-keila/conf/dolphin/rep17</entry>
         </properties>
       </child>
+      <child class="pt.lsts.neptus.plugins.sunfish.IridiumComms" x="0" y="0" width="0" height="0">
+        <properties/>
+      </child>
     </subpanel>
   </mainpanel>
   <mainpanel name="console alarm panel"/>
+  <layers>
+    <layer class="pt.lsts.neptus.console.plugins.planning.DesiredPathLayer" opacity="1.0">
+      <properties/>
+    </layer>
+    <layer class="no.ntnu.gpsplot.GpsPlotter" opacity="1.0">
+      <properties/>
+    </layer>
+    <layer class="pt.lsts.neptus.plugins.alliance.NmeaPlotter" opacity="1.0">
+      <properties>
+        <entry key="TCP Port">5001</entry>
+        <entry key="TCP Host">10.0.100.2</entry>
+        <entry key="Connect via TCP">true</entry>
+      </properties>
+    </layer>
+    <layer class="pt.lsts.neptus.console.plugins.planning.PlanSimulationLayer" opacity="1.0">
+      <properties/>
+    </layer>
+    <layer class="pt.lsts.ripples.RipplesPositions" opacity="1.0">
+      <properties/>
+    </layer>
+  </layers>
 </console>

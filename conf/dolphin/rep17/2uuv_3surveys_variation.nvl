@@ -8,18 +8,13 @@
  //Tasks:
  survey1 = imcPlan('survey1') >>  action { post ready:1 }
  survey2 = imcPlan('survey2') >>  action { post ready:2 }
- survey3 = imcPlan('survey3') >>  action { post ready:3 }
  
- rendezVous   = condition{consume ready:3} >> imcPlan('rv3')
- rendezVous1  = imcPlan('rendezVous1_np2') //imcPlan('rv1_survey1') | imcPlan('rv1')
- rendezVous2  = imcPlan('rendezVous2_np2') //imcPlan('rv2_survey2') | imcPlan('rv2')
+ rendezVous1  = imcPlan('rendezVous1') //imcPlan('rv1_survey1') | imcPlan('rv1')
+ rendezVous2  = imcPlan('rendezVous2') //imcPlan('rv2_survey2') | imcPlan('rv2')
  
-execute  (survey1 | survey2) >>  choose{
-                  when {consume ready:1} then action{ post ready:22 } >> survey3 >> action{ post ready:13 }
-                  when {consume ready:2} then action{ post ready:11 } >> survey3 >> action{ post ready:23 }
-              }
+execute  survey_uuvs: survey1 | survey2,
            
-execute gateway: 
+         gateway: 
               choose{
  			    when {consume ready:11 } then rendezVous1 
 			    when {consume ready:22 } then rendezVous2 
