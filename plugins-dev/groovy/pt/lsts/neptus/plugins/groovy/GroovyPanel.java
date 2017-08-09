@@ -78,7 +78,7 @@ public class GroovyPanel extends ConsolePanel {
     
     private GroovyEngine engine;
     private OutputStream scriptOutput;
-    private JButton openButton,stopScript,runScript,clearOutput;
+    private JButton openButton,stopScript,runScript,clearOutput,autoSave;
     private Border border;
     private JPanel bottom,buttons;
     private JScrollPane outputPanel;
@@ -155,6 +155,8 @@ public class GroovyPanel extends ConsolePanel {
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     groovyScript = fc.getSelectedFile();
+                    border = BorderFactory.createTitledBorder("Script "+FileUtil.getFileNameWithoutExtension(groovyScript)+" Output");
+                    outputPanel.setBorder(border);
                     NeptusLog.pub().info("Opening: " + groovyScript.getName() + "." + "\n");
                     editor.setText(FileUtil.getFileAsString(groovyScript));
                 }
@@ -180,7 +182,30 @@ public class GroovyPanel extends ConsolePanel {
             }
         };
         
-        Action clearAction =  new AbstractAction(I18n.text("Clear Output")){
+        Action autosaveAction = new AbstractAction(I18n.text(""), ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/groovy/images/save.png", 16, 16)) {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(groovyScript!=null)
+                    FileUtil.saveToFile(groovyScript.getAbsolutePath(), editor.getText());
+                else{
+                    File directory = new File("conf/groovy/scripts");
+                    final JFileChooser fc = new JFileChooser(directory);
+                    fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    // Demonstrate "Save" dialog:
+                    int rVal = fc.showDialog(GroovyPanel.this, "Save as...");
+                    if (rVal == JFileChooser.APPROVE_OPTION) {
+                        groovyScript = fc.getSelectedFile();
+                        border = BorderFactory.createTitledBorder("Script "+FileUtil.getFileNameWithoutExtension(groovyScript)+" Output");
+                        outputPanel.setBorder(border);
+                        FileUtil.saveToFile(groovyScript.getAbsolutePath(), editor.getText());
+                    }
+                
+                }
+            }
+        };
+        
+        Action clearAction =  new AbstractAction(I18n.text("Clear Output"),ImageUtils.getScaledIcon("pt/lsts/neptus/plugins/groovy/images/clear.png", 16, 16)){
             @Override
             public void actionPerformed(ActionEvent e) {
                 output.setText("");
@@ -191,11 +216,17 @@ public class GroovyPanel extends ConsolePanel {
         stopScript  = new JButton(stopAction);
         runScript   = new JButton(runAction);
         clearOutput = new JButton(clearAction);
+        autoSave    = new JButton(autosaveAction);
+        openButton.setToolTipText("Open Script");
+        autoSave.setToolTipText("Save Script");
+        clearOutput.setToolTipText("Clear Output Panel");
         
         buttons.add(openButton);
+        buttons.add(autoSave);
         buttons.add(runScript);
         buttons.add(stopScript);
         buttons.add(clearOutput);
+        
         
         bottom.add(buttons);
         border = BorderFactory.createTitledBorder("Script Output");
