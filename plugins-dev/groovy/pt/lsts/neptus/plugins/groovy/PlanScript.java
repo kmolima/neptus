@@ -199,9 +199,13 @@ public class PlanScript extends DSLPlan {
     public PlanType asPlanType(ConsoleLayout console) {
         if(neptusPlan!=null)
             return neptusPlan;//IMCUtils.parsePlanSpecification(console.getMission(),IMCUtils.generatePlanSpecification(neptusPlan));
-        else
-            return IMCUtils.parsePlanSpecification(console.getMission(),this.asPlanSpecification()); //TODO validate generated IMCMessage
-                 
+        else{
+            PlanType p = IMCUtils.parsePlanSpecification(console.getMission(),this.asPlanSpecification()); //TODO validate generated IMCMessage
+            for(String id: this.getVehicles_id())
+                p.addVehicle(id);
+            return p;
+        }
+        
     }
     
 //    public Map<Double,String> getVehiclesRangeSorted(String [] avVehicles){
