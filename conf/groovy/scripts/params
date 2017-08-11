@@ -1,0 +1,18 @@
+def plan = new Plan(console)
+plan.with {
+	planName 'b_mae'
+	compassCalibration direction:'Vdep'
+	/*rows crossAngle:30.0,alternation:50,
+	      firstCurveRight:true,bearing:20.0,cross_angle:10.0
+	move (50,-50)
+	yoyo()
+	popup waitAtSurface:true,stationkeep:true */ 
+	vehicles "lauv-noptilus-1"
+	
+	addToConsole()
+	}
+	println plan.asPlanSpecification().asJSON()
+	/*
+	def plan = new Plan(console,plans.get('b_mae'))
+     println plan.asPlanType().asXML()*/
+	println 'moka bu mae'

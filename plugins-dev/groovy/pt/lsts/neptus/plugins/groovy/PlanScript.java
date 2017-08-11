@@ -35,6 +35,7 @@ package pt.lsts.neptus.plugins.groovy;
 import java.util.ArrayList;
 import java.util.List;
 
+import pt.lsts.imc.PlanSpecification;
 import pt.lsts.imc.groovy.dsl.DSLPlan;
 import pt.lsts.imc.groovy.dsl.Location;
 import pt.lsts.neptus.NeptusLog;
@@ -75,6 +76,7 @@ public class PlanScript extends DSLPlan {
         super(plan.getId());
         neptusConsole = c.getConsole();
         neptusPlan = plan;
+        super.setPlanSpec((PlanSpecification) plan.asIMCPlan(true));
         try {
             this.locate(new Location(PlanUtil.getFirstLocation(plan).getLatitudeRads(),PlanUtil.getFirstLocation(plan).getLongitudeRads()));
         }
@@ -173,6 +175,8 @@ public class PlanScript extends DSLPlan {
         if(neptusConsole!=null){
             if(neptusPlan==null)
                 neptusPlan = this.asPlanType(neptusConsole);
+            else
+                neptusPlan = this.asPlanType(neptusConsole);
             return waypointsToLocations(PlanUtil.getPlanWaypoints(neptusPlan));
 
          }
@@ -203,6 +207,12 @@ public class PlanScript extends DSLPlan {
             PlanType p = IMCUtils.parsePlanSpecification(console.getMission(),this.asPlanSpecification()); //TODO validate generated IMCMessage
             for(String id: this.getVehicles_id())
                 p.addVehicle(id);
+            System.out.println("Original PlanSpecification:\n"+this.asPlanSpecification().asJSON());
+            System.out.println("\n\n\n\nPlanType as IMCPlan:\n"+p.asIMCPlan(true));
+           /* println "Plan Specification:\n"+ps.toString()
+            println ps.asJSON()
+            println ps.asXmlStripped(1,true)*/
+            
             return p;
         }
         
