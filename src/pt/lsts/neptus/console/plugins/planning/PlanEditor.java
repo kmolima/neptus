@@ -171,7 +171,7 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
     private static final long serialVersionUID = 1L;
     private final String defaultCondition = "ManeuverIsDone";
     private MissionType mission = null;
-    private PlanType plan = null;
+    protected PlanType plan = null;
     private PlanElement planElem;
     private ManeuverFactory mf = null;
     private final MapGroup mapGroup = null;
@@ -181,7 +181,7 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
     private final Vector<String> takenNames = new Vector<String>();
     private StateRenderer2D renderer;
     private StateRendererInteraction delegate = null;
-    private JPanel controls;
+    protected JPanel controls;
     protected JPanel sidePanel = null;
     protected JLabel statsLabel = null;
     protected static final String maneuverPreamble = "[Neptus:Maneuver]\n";
@@ -217,10 +217,16 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
     public ToolbarLocation toolbarLocation = ToolbarLocation.Right;
 
     @NeptusProperty(name = "Show Plan Simulation", userLevel = LEVEL.REGULAR)
-    protected boolean showSimulation;
+    public boolean showSimulation;
     
     @NeptusProperty(name = "Show Depth Profile", userLevel = LEVEL.REGULAR)
-    protected boolean showDepth;
+    public boolean showDepth;
+
+    @NeptusProperty(name = "Select Saved Plan on Console", userLevel = LEVEL.ADVANCED)
+    public boolean selectSavedPlanOnConsole = false;
+    
+    @NeptusProperty(name = "Close Editor on Save", userLevel = LEVEL.ADVANCED)
+    public boolean closeEditorOnSave = true;
     
     /**
      * @param console
@@ -230,6 +236,20 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
 
     }
 
+    /**
+     * @return the planChanged
+     */
+    protected boolean isPlanChanged() {
+        return planChanged;
+    }
+    
+    /**
+     * @param planChanged the planChanged to set
+     */
+    protected void setPlanChanged(boolean planChanged) {
+        this.planChanged = planChanged;
+    }
+    
     protected ManeuverPropertiesPanel getPropertiesPanel() {
         if (propertiesPanel == null)
             propertiesPanel = new ManeuverPropertiesPanel();
@@ -609,7 +629,7 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
         getRedoAction().putValue(AbstractAction.SHORT_DESCRIPTION, manager.getRedoPresentationName());
         getUndoAction().setEnabled(manager.canUndo());
         getRedoAction().setEnabled(manager.canRedo());
-        planChanged = manager.canUndo();
+        setPlanChanged(manager.canUndo());
 
         if (planElem != null)
             planElem.recalculateManeuverPositions(renderer);
@@ -714,16 +734,32 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
                 };
                 worker.execute();
 
-                if (getConsole().getPlan() == null || getConsole().getPlan().getId().equalsIgnoreCase(plan.getId())) {
-                    getConsole().setPlan(plan);
-                }
+                boolean consolePlanSet = false;
+                PlanType tmpPlan = plan;
 
                 setPlan(null);
                 manager.discardAllEdits();
                 updateUndoRedo();
-                if (getAssociatedSwitch() != null)
-                    getAssociatedSwitch().doClick();
+                if (closeEditorOnSave){
+                    if (getAssociatedSwitch() != null)
+                        getAssociatedSwitch().doClick();
+                }
+                else {
+                    setPlan(tmpPlan);
+                }
+                
                 getConsole().updateMissionListeners();
+
+                if (getConsole().getPlan() == null || getConsole().getPlan().getId().equalsIgnoreCase(tmpPlan.getId())) {
+                    getConsole().setPlan(tmpPlan);
+                    consolePlanSet = true;
+                }
+                
+                if (selectSavedPlanOnConsole && !consolePlanSet) {
+                    getConsole().setPlan(tmpPlan);
+                }
+                
+                setPlanChanged(false);
             }
         };
     }
@@ -1291,48 +1327,52 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
                             new ImageIcon(ImageUtils.getScaledImage("images/buttons/wizard.png", 16, 16)));
                     planSettings.add(pPayload);
 
-                    AbstractAction pVehicle = new AbstractAction(I18n.text("Set plan vehicles...")) {
-                        private static final long serialVersionUID = 1L;
-
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            Window parentW = SwingUtilities.getWindowAncestor(getConsole());
-                            String[] vehicles = VehicleSelectionDialog.showSelectionDialog(parentW, plan.getVehicles()
-                                    .toArray(new VehicleType[0]));
-                            Vector<VehicleType> vts = new Vector<VehicleType>();
-                            for (String v : vehicles) {
-                                vts.add(VehiclesHolder.getVehicleById(v));
-                            }
-
-                            Vector<VehicleType> oVts = plan.getVehicles();
-                            boolean changed = false;
-                            if (vts.size() != oVts.size() 
-                                    || (vts.isEmpty() && oVts.size() > 0)
-                                    || (vts.size() > 0 && oVts.isEmpty())) {
-                                changed = true;
-                            }
-                            else {
-                                for (VehicleType v : vts) {
-                                    if (!oVts.contains(v)) {
-                                        changed = true;
-                                        break;
+                    String[] vehiclesArray = VehiclesHolder.getVehiclesArray();
+                    if (vehiclesArray.length > 1 || vehiclesArray.length == 1
+                            && !plan.getVehicles().containsAll(Arrays.asList(vehiclesArray))) {
+                        AbstractAction pVehicle = new AbstractAction(I18n.text("Set plan vehicles...")) {
+                            private static final long serialVersionUID = 1L;
+                            
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Window parentW = SwingUtilities.getWindowAncestor(getConsole());
+                                String[] vehicles = VehicleSelectionDialog.showSelectionDialog(parentW, plan.getVehicles()
+                                        .toArray(new VehicleType[0]));
+                                Vector<VehicleType> vts = new Vector<VehicleType>();
+                                for (String v : vehicles) {
+                                    vts.add(VehiclesHolder.getVehicleById(v));
+                                }
+                                
+                                Vector<VehicleType> oVts = plan.getVehicles();
+                                boolean changed = false;
+                                if (vts.size() != oVts.size() 
+                                        || (vts.isEmpty() && oVts.size() > 0)
+                                        || (vts.size() > 0 && oVts.isEmpty())) {
+                                    changed = true;
+                                }
+                                else {
+                                    for (VehicleType v : vts) {
+                                        if (!oVts.contains(v)) {
+                                            changed = true;
+                                            break;
+                                        }
                                     }
                                 }
+                                
+                                if (!changed)
+                                    return;
+                                
+                                PlanType newPlan = plan.clonePlan();
+                                PlanUtil.changePlanVehiclesAndAdjustSettings(newPlan, vts);
+                                PlanVehiclesChange pce = new PlanVehiclesChange(PlanEditor.this, plan, newPlan);
+                                pce.redo(); // To clear gui and references
+                                manager.addEdit(pce);
                             }
-                            
-                            if (!changed)
-                                return;
-                            
-                            PlanType newPlan = plan.clonePlan();
-                            PlanUtil.changePlanVehiclesAndAdjustSettings(newPlan, vts);
-                            PlanVehiclesChange pce = new PlanVehiclesChange(PlanEditor.this, plan, newPlan);
-                            pce.redo(); // To clear gui and references
-                            manager.addEdit(pce);
-                        }
-                    };
-                    pVehicle.putValue(AbstractAction.SMALL_ICON,
-                            new ImageIcon(ImageUtils.getScaledImage("images/buttons/wizard.png", 16, 16)));
-                    planSettings.add(pVehicle);
+                        };
+                        pVehicle.putValue(AbstractAction.SMALL_ICON,
+                                new ImageIcon(ImageUtils.getScaledImage("images/buttons/wizard.png", 16, 16)));
+                        planSettings.add(pVehicle);
+                    }
 
                     AbstractAction pTrans = new AbstractAction(I18n.text("Reverse plan transitions...")) {
                         private static final long serialVersionUID = 1L;
@@ -1962,6 +2002,15 @@ public class PlanEditor extends InteractionAdapter implements Renderer2DPainter,
                 delegate.keyPressed(event, source);
         }
         else {
+            if (event.getKeyCode() == KeyEvent.VK_Z && event.isControlDown()) {
+                getUndoAction().actionPerformed(new ActionEvent(this, 0, ""));
+                event.consume();
+            }
+            else if (event.getKeyCode() == KeyEvent.VK_Y && event.isControlDown()) {
+                getRedoAction().actionPerformed(new ActionEvent(this, 0, ""));
+                event.consume();
+            }
+
             super.keyPressed(event, source);
         }
     }
