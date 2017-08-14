@@ -21,6 +21,7 @@ conf/neptus-misc-systems.xml
 conf/params/manta*.xml
 vehicles-defs/*-lauv-simulator-*.nvcl
 conf/params/lauv-simulator*.xml
+conf/groovy/scripts/*
 maps/*.conf
 helper-scripts/
 neptus.exe
