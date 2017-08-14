@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <config format="1" version="2017.01.0 (mission/rep17,441df103)" system="lauv-xplore-1" i18n="pt_PT">
+=======
+<config format="1" version="2017.01.0 (master,bbdacf3)" system="lauv-xplore-1" i18n="pt_PT">
+>>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
   <section name="Motor Controller" name-i18n="Controlador de Motor">
     <param name="Entity Label">
       <name-i18n>Nome da Entidade</name-i18n>
@@ -386,121 +390,6 @@
       <units/>
       <desc>Direction of the servos</desc>
       <size>4</size>
-    </param>
-  </section>
-  <section name="TREX" name-i18n="TREX">
-    <param name="Entity Label">
-      <name-i18n>Nome da Entidade</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>TREX</default>
-      <units/>
-      <desc>Nome principal da entidade</desc>
-    </param>
-    <param name="Execution Priority">
-      <name-i18n>Prioridade de Execução</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>10</default>
-      <units/>
-      <desc>Prioridade de execução</desc>
-    </param>
-    <param name="Activation Time">
-      <name-i18n>Tempo de Ativação</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc/>
-    </param>
-    <param name="Deactivation Time">
-      <name-i18n>Tempo de Desativação</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc/>
-    </param>
-    <param name="Debug Level">
-      <name-i18n>Nível de Depuração</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>None</default>
-      <units/>
-      <desc/>
-      <values>None, Debug, Trace, Spew</values>
-      <values-i18n>None, Debug, Trace, Spew</values-i18n>
-    </param>
-    <param name="Active - Scope">
-      <name-i18n>Ativa - Escopo</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>global</default>
-      <units/>
-      <desc>Escopo do parâmetro 'Ativa'</desc>
-    </param>
-    <param name="Active - Visibility">
-      <name-i18n>Ativa - Visibilidade</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>user</default>
-      <units/>
-      <desc>Visibilidade do parâmetro 'Ativa'</desc>
-    </param>
-    <param name="Active">
-      <name-i18n>Ativa</name-i18n>
-      <type>boolean</type>
-      <visibility>user</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc>Verdadeiro para ativar tarefa, falso caso contrário</desc>
-    </param>
-    <param name="TREX ID">
-      <name-i18n>TREX ID</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>65001</default>
-      <units/>
-      <desc/>
-      <min>0</min>
-    </param>
-    <param name="TREX Connection Timeout">
-      <name-i18n>TREX Connection Timeout</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>60</default>
-      <units/>
-      <desc/>
-      <min>0</min>
-    </param>
-    <param name="FollowReference altitude interval">
-      <name-i18n>FollowReference altitude interval</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>2</default>
-      <units/>
-      <desc/>
-      <min>0</min>
-    </param>
-    <param name="CPU Power Channel">
-      <name-i18n>CPU Power Channel</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>None</default>
-      <units/>
-      <desc>Name of the auxiliary CPU's power channel</desc>
     </param>
   </section>
   <section name="Text Message Parser" name-i18n="Processador de Mensagens de Texto">
@@ -3184,7 +3073,7 @@
       <type>list:string</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>Attitude, Daemon, GPS, Operational Limits, Path Control</default>
+      <default>Attitude, Daemon, GPS, Navigation, Operational Limits, Path Control</default>
       <units/>
       <desc>Default entities to monitor</desc>
     </param>
@@ -8307,6 +8196,7 @@
     </param>
   </section>
   <section name="Back Seat TCP Server" name-i18n="Back Seat TCP Server">
+<<<<<<< HEAD
     <param name="Entity Label">
       <name-i18n>Nome da Entidade</name-i18n>
       <type>string</type>
@@ -8396,6 +8286,146 @@
       <visibility>developer</visibility>
       <scope>global</scope>
       <default>false</default>
+      <units/>
+      <desc>Enable verbose output regarding outgoing messages</desc>
+    </param>
+    <param name="Port">
+      <name-i18n>Port</name-i18n>
+      <type>integer</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>6006</default>
+      <units/>
+      <desc>TCP server port</desc>
+    </param>
+    <param name="Announce Service">
+      <name-i18n>Announce Service</name-i18n>
+      <type>boolean</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>false</default>
+      <units/>
+      <desc>Set to true to announce the service</desc>
+    </param>
+  </section>
+  <section name="UDP" name-i18n="UDP">
+=======
+>>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
+    <param name="Entity Label">
+      <name-i18n>Nome da Entidade</name-i18n>
+      <type>string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>Back Seat TCP Server</default>
+      <units/>
+      <desc>Nome principal da entidade</desc>
+    </param>
+    <param name="Execution Priority">
+      <name-i18n>Prioridade de Execução</name-i18n>
+      <type>integer</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>10</default>
+      <units/>
+      <desc>Prioridade de execução</desc>
+    </param>
+    <param name="Activation Time">
+      <name-i18n>Tempo de Ativação</name-i18n>
+      <type>integer</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>0</default>
+      <units/>
+      <desc/>
+    </param>
+    <param name="Deactivation Time">
+      <name-i18n>Tempo de Desativação</name-i18n>
+      <type>integer</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>0</default>
+      <units/>
+      <desc/>
+    </param>
+    <param name="Debug Level">
+      <name-i18n>Nível de Depuração</name-i18n>
+      <type>string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>None</default>
+      <units/>
+      <desc/>
+      <values>None, Debug, Trace, Spew</values>
+      <values-i18n>None, Debug, Trace, Spew</values-i18n>
+    </param>
+    <param name="Transports">
+      <name-i18n>Transports</name-i18n>
+      <type>list:string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>Abort, AcousticLink, AlignmentState, EntityParameters, EstimatedState, FuelLevel, PathControlState, PlanControl, PlanControlState, FollowRefState, GpsFix, ReportControl, Salinity, Temperature, UamRxFrame, UamTxStatus, VehicleMedium, VehicleState</default>
+      <units/>
+      <desc>Messages to transport</desc>
+    </param>
+    <param name="Rate Limiters">
+      <name-i18n>Rate Limiters</name-i18n>
+      <type>list:string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default/>
+      <units/>
+      <desc>List of &lt;Message&gt;:&lt;Frequency&gt;</desc>
+    </param>
+    <param name="Filtered Entities">
+      <name-i18n>Filtered Entities</name-i18n>
+      <type>list:string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+<<<<<<< HEAD
+      <default>CpuUsage:Daemon, Distance:Altimeter+DVL Filtered+Echo Sounder, Temperature:CTD+Depth Sensor, Voltage:Batteries+Rhodamine+Turbidity+Chlorophyll</default>
+=======
+      <default/>
+>>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
+      <units/>
+      <desc>List of &lt;Message&gt;:&lt;Entity&gt;+&lt;Entity&gt; that define the source entities allowed to pass message of a specific message type.</desc>
+    </param>
+    <param name="Trace - Incoming Messages">
+      <name-i18n>Trace - Incoming Messages</name-i18n>
+      <type>boolean</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>false</default>
+      <units/>
+      <desc>Enable verbose output regarding incoming messages</desc>
+    </param>
+    <param name="Trace - Outgoing Messages">
+      <name-i18n>Trace - Outgoing Messages</name-i18n>
+      <type>boolean</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+<<<<<<< HEAD
+      <default>true</default>
+      <units/>
+      <desc>Allow underwater communication when limited comms are being simulated</desc>
+    </param>
+    <param name="Transports">
+      <name-i18n>Transports</name-i18n>
+      <type>list:string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>AcousticOperation, AlignmentState, CpuUsage, DevCalibrationControl, DevCalibrationState, Distance, EntityList, EntityParameters, EntityState, EstimatedState, FollowRefState, FuelLevel, Heartbeat, IridiumMsgRx, IridiumMsgTx, IridiumTxStatus, LblEstimate, LblRangeAcceptance, LblConfig, LogBookEntry, LogBookControl, OperationalLimits, PathControlState, PlanControl, PlanControlState, PlanDB, PlanGeneration, PowerChannelState, ReportControl, RemoteActions, RemoteActionsRequest, Rpm, RSSI, SadcReadings, SimulatedState, StorageUsage, Temperature, TextMessage, TrexObservation, TrexOperation, TrexToken, TrexPlan, UsblAnglesExtended, UsblPositionExtended, UsblFixExtended, UsblModem, UsblConfig, VehicleMedium, VehicleState, Voltage</default>
+      <units/>
+      <desc>List of messages to transport</desc>
+    </param>
+    <param name="Always Transmitted Messages">
+      <name-i18n>Always Transmitted Messages</name-i18n>
+      <type>list:string</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>Abort, SimulatedState</default>
+=======
+      <default>false</default>
+>>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
       <units/>
       <desc>Enable verbose output regarding outgoing messages</desc>
     </param>
@@ -8580,190 +8610,6 @@
       <visibility>developer</visibility>
       <scope>global</scope>
       <default>Abort, SimulatedState</default>
-      <units/>
-      <desc>List of messages that will always be transmitted disregarding communication limitations</desc>
-    </param>
-    <param name="Dynamic Nodes">
-      <name-i18n>Dynamic Nodes</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>true</default>
-      <units/>
-      <desc>Allow use of dynamic nodes.</desc>
-    </param>
-    <param name="Local Messages Only">
-      <name-i18n>Local Messages Only</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Only transmit messsages from local system.</desc>
-    </param>
-  </section>
-  <section name="UDP to TREX" name-i18n="UDP para TREX">
-    <param name="Entity Label">
-      <name-i18n>Nome da Entidade</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>UDP to TREX</default>
-      <units/>
-      <desc>Nome principal da entidade</desc>
-    </param>
-    <param name="Execution Priority">
-      <name-i18n>Prioridade de Execução</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>10</default>
-      <units/>
-      <desc>Prioridade de execução</desc>
-    </param>
-    <param name="Activation Time">
-      <name-i18n>Tempo de Ativação</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc/>
-    </param>
-    <param name="Deactivation Time">
-      <name-i18n>Tempo de Desativação</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc/>
-    </param>
-    <param name="Debug Level">
-      <name-i18n>Nível de Depuração</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>None</default>
-      <units/>
-      <desc/>
-      <values>None, Debug, Trace, Spew</values>
-      <values-i18n>None, Debug, Trace, Spew</values-i18n>
-    </param>
-    <param name="Local Port">
-      <name-i18n>Local Port</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>6970</default>
-      <units/>
-      <desc>Local UDP port to listen on</desc>
-    </param>
-    <param name="Contact Timeout">
-      <name-i18n>Contact Timeout</name-i18n>
-      <type>real</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>30</default>
-      <units>s</units>
-      <desc/>
-    </param>
-    <param name="Contact Refresh Periodicity">
-      <name-i18n>Contact Refresh Periodicity</name-i18n>
-      <type>real</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>5.0</default>
-      <units>s</units>
-      <desc/>
-    </param>
-    <param name="Print Outgoing Messages">
-      <name-i18n>Print Outgoing Messages</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Print outgoing messages (Debug)</desc>
-    </param>
-    <param name="Print Incoming Messages">
-      <name-i18n>Print Incoming Messages</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Print incoming messages (Debug)</desc>
-    </param>
-    <param name="Static Destinations">
-      <name-i18n>Static Destinations</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>10.0.10.123:6969</default>
-      <units/>
-      <desc>List of &lt;IPv4&gt;:&lt;Port&gt; destinations that will always receive outgoing messages</desc>
-    </param>
-    <param name="Rate Limiters">
-      <name-i18n>Rate Limiters</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>EstimatedState:2, NavigationUncertainty:2</default>
-      <units/>
-      <desc>List of &lt;Message&gt;:&lt;Frequency&gt;</desc>
-    </param>
-    <param name="Filtered Entities">
-      <name-i18n>Filtered Entities</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default/>
-      <units/>
-      <desc>List of &lt;Message&gt;:&lt;Entity&gt;+&lt;Entity&gt; that define the source entities allowed to pass message of a specific message type.</desc>
-    </param>
-    <param name="Announce Service">
-      <name-i18n>Announce Service</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Announce this transport to services or not</desc>
-    </param>
-    <param name="Communication Range">
-      <name-i18n>Communication Range</name-i18n>
-      <type>real</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units>m</units>
-      <desc>Communication range (0 for infinite)</desc>
-    </param>
-    <param name="Underwater Communications">
-      <name-i18n>Underwater Communications</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Allow underwater communication when limited comms are being simulated</desc>
-    </param>
-    <param name="Transports">
-      <name-i18n>Transports</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>Abort, EntityList, EstimatedState, GpsFix, FollowRefState, TrexOperation, PlanControlState, OperationalLimits, NavigationUncertainty, VehicleMedium</default>
-      <units/>
-      <desc>List of messages to transport</desc>
-    </param>
-    <param name="Always Transmitted Messages">
-      <name-i18n>Always Transmitted Messages</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default/>
       <units/>
       <desc>List of messages that will always be transmitted disregarding communication limitations</desc>
     </param>

@@ -24,6 +24,7 @@ conf/dolphin/*.nvl
 conf/groovy/scripts/*
 vehicles-defs/*-lauv-simulator-*.nvcl
 conf/params/lauv-simulator*.xml
+conf/groovy/scripts/*
 maps/*.conf
 helper-scripts/
 neptus.exe
