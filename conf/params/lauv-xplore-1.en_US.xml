@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<config format="1" version="2017.01.0 (mission/rep17,441df103)" system="lauv-xplore-1" i18n="en_US">
-=======
 <config format="1" version="2017.01.0 (master,bbdacf3)" system="lauv-xplore-1" i18n="en_US">
->>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
   <section name="Motor Controller" name-i18n="Motor Controller">
     <param name="Entity Label">
       <name-i18n>Entity Label</name-i18n>
@@ -1503,7 +1499,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>15</default>
+      <default>20</default>
       <units>s</units>
       <desc>Period for along-track error check</desc>
     </param>
@@ -1512,7 +1508,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>0.25</default>
+      <default>0.05</default>
       <units>m/s</units>
       <desc>Minimum speed for along-track progress</desc>
     </param>
@@ -1521,7 +1517,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>10</default>
+      <default>2</default>
       <units>°/s</units>
       <desc>Minimum yaw speed for track bearing convergence</desc>
     </param>
@@ -1530,7 +1526,7 @@
       <type>boolean</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>false</default>
+      <default>true</default>
       <units/>
       <desc>Enable cross-track error monitoring</desc>
     </param>
@@ -1539,7 +1535,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>15</default>
+      <default>25</default>
       <units>m</units>
       <desc>Distance threshold value for cross-track error</desc>
     </param>
@@ -1548,7 +1544,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>10</default>
+      <default>20</default>
       <units>s</units>
       <desc>Time threshold value for cross-track error</desc>
     </param>
@@ -1557,7 +1553,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>-1</default>
+      <default>1</default>
       <units/>
       <desc/>
     </param>
@@ -1566,7 +1562,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>7.0</default>
+      <default>10.0</default>
       <units>m</units>
       <desc>Threshold for a jump in EstimatedState to turn monitors off</desc>
     </param>
@@ -1575,7 +1571,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>0.3</default>
+      <default>0.5</default>
       <units>m/s</units>
       <desc>Relation between monitor disabling time and position jump</desc>
       <min>0.1</min>
@@ -1585,7 +1581,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>1.0</default>
+      <default>0.1</default>
       <units>m/s</units>
       <desc>ETA minimum admissible speed</desc>
       <min>0.1</min>
@@ -1595,7 +1591,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>5</default>
+      <default>5.0</default>
       <units>s</units>
       <desc>Timeout for new incoming path reference</desc>
       <min>3</min>
@@ -1615,7 +1611,7 @@
       <type>integer</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>5</default>
+      <default>7</default>
       <units/>
       <desc>Number of samples for forward range moving average</desc>
     </param>
@@ -1624,7 +1620,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>15.0</default>
+      <default>35.0</default>
       <units>°</units>
       <desc>Safe pitch angle to perform bottom tracking</desc>
     </param>
@@ -1642,7 +1638,7 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>4.0</default>
+      <default>8.0</default>
       <units>m</units>
       <desc>Minimum admissible forward range for bottom tracking</desc>
     </param>
@@ -1651,7 +1647,7 @@
       <type>boolean</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>true</default>
+      <default>false</default>
       <units/>
       <desc>Check slope angle trend in unsafe state</desc>
     </param>
@@ -1678,9 +1674,58 @@
       <type>real</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>3.0</default>
+      <default>2.5</default>
       <units>m</units>
       <desc>Admissible altitude when doing depth control</desc>
+    </param>
+    <param name="Corridor -- Width">
+      <name-i18n>Corridor -- Width</name-i18n>
+      <type>real</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>1.5</default>
+      <units>m</units>
+      <desc>Width of corridor for attack entry angle</desc>
+      <min>1.0</min>
+      <max>50.0</max>
+    </param>
+    <param name="Corridor -- Entry Angle">
+      <name-i18n>Corridor -- Entry Angle</name-i18n>
+      <type>real</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>15.0</default>
+      <units>°</units>
+      <desc>Attack angle when lateral track error equals corridor width</desc>
+      <min>2</min>
+      <max>45</max>
+    </param>
+    <param name="Extended Control -- Enabled">
+      <name-i18n>Extended Control -- Enabled</name-i18n>
+      <type>boolean</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>false</default>
+      <units/>
+      <desc>Enable extended (refined) corridor control</desc>
+    </param>
+    <param name="Extended Control -- Controller Gain">
+      <name-i18n>Extended Control -- Controller Gain</name-i18n>
+      <type>real</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>1.0</default>
+      <units/>
+      <desc>Gain for extended control</desc>
+    </param>
+    <param name="Extended Control -- Turn Rate Gain">
+      <name-i18n>Extended Control -- Turn Rate Gain</name-i18n>
+      <type>real</type>
+      <visibility>developer</visibility>
+      <scope>global</scope>
+      <default>1.0</default>
+      <units/>
+      <desc>Turn rate gain for extended control</desc>
     </param>
   </section>
   <section name="Communications Relay Maneuver" name-i18n="Communications Relay Maneuver">
@@ -2419,7 +2464,7 @@
       <type>boolean</type>
       <visibility>developer</visibility>
       <scope>global</scope>
-      <default>true</default>
+      <default>false</default>
       <units/>
       <desc>Request reports when popping at surface</desc>
     </param>
@@ -8196,7 +8241,6 @@
     </param>
   </section>
   <section name="Back Seat TCP Server" name-i18n="Back Seat TCP Server">
-<<<<<<< HEAD
     <param name="Entity Label">
       <name-i18n>Entity Label</name-i18n>
       <type>string</type>
@@ -8286,146 +8330,6 @@
       <visibility>developer</visibility>
       <scope>global</scope>
       <default>false</default>
-      <units/>
-      <desc>Enable verbose output regarding outgoing messages</desc>
-    </param>
-    <param name="Port">
-      <name-i18n>Port</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>6006</default>
-      <units/>
-      <desc>TCP server port</desc>
-    </param>
-    <param name="Announce Service">
-      <name-i18n>Announce Service</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Set to true to announce the service</desc>
-    </param>
-  </section>
-  <section name="UDP" name-i18n="UDP">
-=======
->>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
-    <param name="Entity Label">
-      <name-i18n>Entity Label</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>Back Seat TCP Server</default>
-      <units/>
-      <desc>Main entity label</desc>
-    </param>
-    <param name="Execution Priority">
-      <name-i18n>Execution Priority</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>10</default>
-      <units/>
-      <desc>Execution priority</desc>
-    </param>
-    <param name="Activation Time">
-      <name-i18n>Activation Time</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc/>
-    </param>
-    <param name="Deactivation Time">
-      <name-i18n>Deactivation Time</name-i18n>
-      <type>integer</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>0</default>
-      <units/>
-      <desc/>
-    </param>
-    <param name="Debug Level">
-      <name-i18n>Debug Level</name-i18n>
-      <type>string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>None</default>
-      <units/>
-      <desc/>
-      <values>None, Debug, Trace, Spew</values>
-      <values-i18n>None, Debug, Trace, Spew</values-i18n>
-    </param>
-    <param name="Transports">
-      <name-i18n>Transports</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>Abort, AcousticLink, AlignmentState, EntityParameters, EstimatedState, FuelLevel, PathControlState, PlanControl, PlanControlState, FollowRefState, GpsFix, ReportControl, Salinity, Temperature, UamRxFrame, UamTxStatus, VehicleMedium, VehicleState</default>
-      <units/>
-      <desc>Messages to transport</desc>
-    </param>
-    <param name="Rate Limiters">
-      <name-i18n>Rate Limiters</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default/>
-      <units/>
-      <desc>List of &lt;Message&gt;:&lt;Frequency&gt;</desc>
-    </param>
-    <param name="Filtered Entities">
-      <name-i18n>Filtered Entities</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-<<<<<<< HEAD
-      <default>CpuUsage:Daemon, Distance:Altimeter+DVL Filtered+Echo Sounder, Temperature:CTD+Depth Sensor, Voltage:Batteries+Rhodamine+Turbidity+Chlorophyll</default>
-=======
-      <default/>
->>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
-      <units/>
-      <desc>List of &lt;Message&gt;:&lt;Entity&gt;+&lt;Entity&gt; that define the source entities allowed to pass message of a specific message type.</desc>
-    </param>
-    <param name="Trace - Incoming Messages">
-      <name-i18n>Trace - Incoming Messages</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>false</default>
-      <units/>
-      <desc>Enable verbose output regarding incoming messages</desc>
-    </param>
-    <param name="Trace - Outgoing Messages">
-      <name-i18n>Trace - Outgoing Messages</name-i18n>
-      <type>boolean</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-<<<<<<< HEAD
-      <default>true</default>
-      <units/>
-      <desc>Allow underwater communication when limited comms are being simulated</desc>
-    </param>
-    <param name="Transports">
-      <name-i18n>Transports</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>AcousticOperation, AlignmentState, CpuUsage, DevCalibrationControl, DevCalibrationState, Distance, EntityList, EntityParameters, EntityState, EstimatedState, FollowRefState, FuelLevel, Heartbeat, IridiumMsgRx, IridiumMsgTx, IridiumTxStatus, LblEstimate, LblRangeAcceptance, LblConfig, LogBookEntry, LogBookControl, OperationalLimits, PathControlState, PlanControl, PlanControlState, PlanDB, PlanGeneration, PowerChannelState, ReportControl, RemoteActions, RemoteActionsRequest, Rpm, RSSI, SadcReadings, SimulatedState, StorageUsage, Temperature, TextMessage, TrexObservation, TrexOperation, TrexToken, TrexPlan, UsblAnglesExtended, UsblPositionExtended, UsblFixExtended, UsblModem, UsblConfig, VehicleMedium, VehicleState, Voltage</default>
-      <units/>
-      <desc>List of messages to transport</desc>
-    </param>
-    <param name="Always Transmitted Messages">
-      <name-i18n>Always Transmitted Messages</name-i18n>
-      <type>list:string</type>
-      <visibility>developer</visibility>
-      <scope>global</scope>
-      <default>Abort, SimulatedState</default>
-=======
-      <default>false</default>
->>>>>>> f18b169d208c204bec20ae432bb1386426106d7c
       <units/>
       <desc>Enable verbose output regarding outgoing messages</desc>
     </param>
