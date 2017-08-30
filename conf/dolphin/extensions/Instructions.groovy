@@ -16,7 +16,7 @@ import pt.lsts.imc.PlanDB.TYPE
  * 
  * @author Keila
  * 
- * Dolphin additional functions to program 
+ * Dolphin additional instructions to program 
  *
  */
 class Instructions {

@@ -1,3 +1,4 @@
+ccu = Location.APDL
 n = ask 'How many surveys?'
 uuvs = pick {
 	 count: 2;
@@ -11,7 +12,8 @@ gateway = pick {
 
 survey1 = imcPlan('survey1') >>  action { post ready:1 }
 survey2 = imcPlan('survey2') >>  action { post ready:2 }
-wifi_range = position CCU as Location
+//Location 500m south and west from APDL 
+wifi_range = ccu.move -500,-500
 until (!poll ready:1 & !poll ready:2) {
 	skeeping location:wifi_range
 	
