@@ -1,0 +1,2 @@
+ x = Position.fromDegrees(35, -8, 0)
+    y = x as Location

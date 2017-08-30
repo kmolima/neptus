@@ -75,7 +75,7 @@ class Instructions {
   }
   
   static main(args) {
-    NeptusPlatform.INSTANCE.displayMessage 'Neptus language extensions loaded!'
+    NeptusPlatform.INSTANCE.displayMessage 'Neptus language instructions extensions loaded!'
   }
 }
 
