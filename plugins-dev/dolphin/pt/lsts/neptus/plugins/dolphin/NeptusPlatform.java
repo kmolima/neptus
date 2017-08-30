@@ -50,6 +50,7 @@ import pt.lsts.neptus.comm.manager.imc.ImcMsgManager;
 import pt.lsts.neptus.comm.manager.imc.ImcSystem;
 import pt.lsts.neptus.comm.manager.imc.ImcSystemsHolder;
 import pt.lsts.neptus.types.mission.plan.PlanType;
+import pt.lsts.neptus.util.FileUtil;
 import pt.lsts.dolphin.dsl.Engine;
 import pt.lsts.dolphin.runtime.EnvironmentException;
 import pt.lsts.dolphin.runtime.NodeSet;
@@ -210,8 +211,13 @@ public enum NeptusPlatform implements Platform {
     public void customizeGroovyCompilation(CompilerConfiguration cc) {
         displayMessage("Customizing compilation for Neptus runtime ...");
         ImportCustomizer ic = new ImportCustomizer();
-        ic.addStaticStars("pt.lsts.neptus.plugins.dolphin.dsl.Instructions");
+        //ic.addStaticStars("pt.lsts.neptus.plugins.dolphin.dsl.Instructions");
         ic.addStarImports("pt.lsts.imc.groovy.dsl");
+        for(File extension: getExtensionFiles()){
+            String imporT = "pt.lsts.neptus.plugins.dolphin.dsl."+FileUtil.getFileNameWithoutExtension(extension.getName());
+            ic.addStaticStars(imporT);
+            displayMessage("%s immport added\n", imporT);
+        }
         for (String msg : IMCDefinition.getInstance().getConcreteMessages()) {
           ic.addImports("pt.lsts.imc." + msg);
         }

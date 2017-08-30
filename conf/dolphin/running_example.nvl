@@ -1,0 +1,18 @@
+n = ask 'How many surveys?'
+uuvs = pick {
+	 count: 2;
+	 payload 'Sidescan';
+	}
+
+gateway = pick {
+	
+	payload 'accoustics';
+	}
+
+survey1 = imcPlan('survey1') >>  action { post ready:1 }
+survey2 = imcPlan('survey2') >>  action { post ready:2 }
+wifi_range = position CCU as Location
+until (!poll ready:1 & !poll ready:2) {
+	skeeping location:wifi_range
+	
+	}
