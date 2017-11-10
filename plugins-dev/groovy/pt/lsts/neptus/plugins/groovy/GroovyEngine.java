@@ -66,7 +66,7 @@ public class GroovyEngine {
     private Map<String,ImcSystem> vehicles = Collections.synchronizedMap(new HashMap<>()); 
     private Map<String,PlanType> plans = Collections.synchronizedMap(new HashMap<>()); 
     private Map<String,Location> locations = Collections.synchronizedMap(new HashMap<>());
-    private Binding binds; //verify use of @TypeChecked
+    private Binding binds; 
     private GroovyScriptEngine engine;
     private CompilerConfiguration config;
     private Thread runningThread;
