@@ -33,6 +33,9 @@
 package pt.lsts.neptus.plugins.dolphin;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -72,14 +75,50 @@ public enum NeptusPlatform implements Platform {
     }
 
     private DolphinConsolePanel consolePanel;
+    private StringBuffer buffer; 
+    private OutputStream scriptOutput;
+    private PrintStream  ps;
+
 
     private NeptusPlatform() {
-        pt.lsts.dolphin.util.Debug.enable();
+        configWriter();
+        pt.lsts.dolphin.util.Debug.enable(ps,true); //short version of logger
         Engine.create(this);
         consolePanel = null;
         d("initialized");
     }
     
+    /**
+     * 
+     */
+    private void configWriter() {
+        buffer = new StringBuffer();
+        scriptOutput = new OutputStream() {
+            
+
+            @Override
+            public void flush() throws IOException{
+                //consolePanel.displayMessage(buffer.toString(), null);
+                NeptusLog.pub().info(buffer.toString());
+                buffer = new StringBuffer();
+                
+            }
+
+            @Override
+            public void close() throws IOException {
+            }
+
+            @Override
+            public void write(int b) throws IOException {
+                buffer.append((char)b);
+                
+            } 
+            
+        };
+        ps = new PrintStream(scriptOutput, true);
+
+    }
+
     /**
      * Associates Platform to a console currently open
      * @param cp Neptus Console

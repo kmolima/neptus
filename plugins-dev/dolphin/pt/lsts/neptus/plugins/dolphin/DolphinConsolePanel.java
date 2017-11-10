@@ -206,7 +206,7 @@ public class DolphinConsolePanel extends ConsolePanel {
         //output.setBorder(border);
         output.setEditable(false);
         output.setVisible(true);
-        output.append("Dolphin Runtime Console\n");
+        output.append("Dolphin Runtime Console");
         outputPanel = new JScrollPane(output);
         outputPanel.setBorder(border);
 
