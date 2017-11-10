@@ -1,20 +1,26 @@
-ccu = Location.APDL
-n = ask 'How many surveys?'
-uuvs = pick {
-	 count: 2;
-	 payload 'Sidescan';
-	}
+//Vehicle's Selection
+n = ask 'How many UUVs?'
+survey_uuvs    = pick { type 'UUV' 
+                        count  n-1 
+                        payload 'Sidescan','Multibeam'
+                       }
+gateway = pick { type 'UUV'
+                  id 'lauv-noptilus-2'  }
+setCommunicationTimeout 30.minutes
 
-gateway = pick {
-	
-	payload 'accoustics';
-	}
+//APDL coordinates in degrees
+apdl = new Position(35.degrees,-8.degrees,0)
 
+//Tasks:
 survey1 = imcPlan('survey1') >>  action { post ready:1 }
 survey2 = imcPlan('survey2') >>  action { post ready:2 }
-//Location 500m south and west from APDL 
-wifi_range = ccu.move -500,-500
-until (!poll ready:1 & !poll ready:2) {
-	skeeping location:wifi_range
-	
-	}
+
+stay_in_the_way  = imcPlan {
+                      planName 'stayStill'
+                      locate   Location.APDL//apdl as Location
+                      move (-500,-500) //Translate 500m south and west
+                      skeeping()
+
+                   }
+execute survey_uuvs: survey1 | survey2 ,
+        gateway:     waitFor {(poll ready:1) && (poll ready:2)}then stay_in_the_way
