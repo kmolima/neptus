@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2017 Universidade do Porto - Faculdade de Engenharia
+ * Copyright (c) 2004-2018 Universidade do Porto - Faculdade de Engenharia
  * Laboratório de Sistemas e Tecnologia Subaquática (LSTS)
  * All rights reserved.
  * Rua Dr. Roberto Frias s/n, sala I203, 4200-465 Porto, Portugal
@@ -1235,6 +1235,14 @@ public class SystemsList extends ConsolePanel implements MainVehicleChangeListen
                     + StringUtils.wrapEveryNChars(sys.getOnErrorStateStr(), (short) 30, 30, true);
         }
 
+        SystemImcMsgCommInfo commS = ImcMsgManager.getManager().getCommInfoById(sys.getId());
+        long deltaMillis = System.currentTimeMillis() - (long) commS.getArrivalTimeMillisLastMsg();
+        if (deltaMillis > 10000) {
+            txtInfo += (txtInfo.length() != 0 ? lineSep + "" : "");
+            txtInfo += I18n.textf("%deltaTime with no messages",
+                    DateTimeUtil.milliSecondsToFormatedString(deltaMillis, true));
+        }
+        
         // Update Loc info
         LocationType loc = sys.getLocation();
         if (loc != null && !loc.isLocationEqual(LocationType.ABSOLUTE_ZERO)) {
