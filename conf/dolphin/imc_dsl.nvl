@@ -1,13 +1,13 @@
-//v = pick {
-//id 'lauv-noptilus-1'
-//}
+v = pick {
+id 'lauv-noptilus-2'
+}
 
 p = imcPlan {
     planName "IMCDSL"
 	speed 1.5, Speed.Units.METERS_PS
 	locate Location.APDL
-	move 200,0
+	move (-200,0)
 	goTo payload:[[name:'Sidescan',Range: 50]]
 }
 message p
-//execute v: p
+execute v: p

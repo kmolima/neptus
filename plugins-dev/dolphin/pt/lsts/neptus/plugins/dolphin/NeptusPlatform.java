@@ -249,7 +249,7 @@ public enum NeptusPlatform implements Platform {
     public void customizeGroovyCompilation(CompilerConfiguration cc) {
         displayMessage("Customizing compilation for Neptus runtime ...");
         ImportCustomizer ic = new ImportCustomizer();
-        ic.addStarImports("pt.lsts.imc.groovy.dsl");
+        ic.addStarImports("pt.lsts.imc.dsl");
         for (String msg : IMCDefinition.getInstance().getConcreteMessages()) {
           ic.addImports("pt.lsts.imc." + msg);
         }
