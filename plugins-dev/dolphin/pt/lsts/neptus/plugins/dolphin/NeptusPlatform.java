@@ -59,9 +59,10 @@ import pt.lsts.dolphin.runtime.NodeSet;
 import pt.lsts.dolphin.runtime.Platform;
 import pt.lsts.dolphin.runtime.tasks.PlatformTask;
 
+
 /**
  * Singleton Platform instance for Dolphin Language Runtime
- * @author lsts
+ * @author keila
  *
  */
 public enum NeptusPlatform implements Platform {
@@ -192,6 +193,8 @@ public enum NeptusPlatform implements Platform {
         
         if(consolePanel!=null){
             PlanType plan = IMCUtils.parsePlanSpecification(consolePanel.getConsole().getMission(),ps);
+            if(plan.getVehicle().isEmpty()) 
+                plan.setVehicle(consolePanel.getMainVehicleId()); 
             consolePanel.getConsole().getMission().addPlan(plan);
             consolePanel.getConsole().getMission().save(true);
             consolePanel.getConsole().updateMissionListeners();
