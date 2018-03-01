@@ -193,8 +193,7 @@ public enum NeptusPlatform implements Platform {
         
         if(consolePanel!=null){
             PlanType plan = IMCUtils.parsePlanSpecification(consolePanel.getConsole().getMission(),ps);
-            if(plan.getVehicle().isEmpty()) 
-                plan.setVehicle(consolePanel.getMainVehicleId()); 
+            plan.setVehicle(consolePanel.getMainVehicleId()); 
             consolePanel.getConsole().getMission().addPlan(plan);
             consolePanel.getConsole().getMission().save(true);
             consolePanel.getConsole().updateMissionListeners();
@@ -253,10 +252,10 @@ public enum NeptusPlatform implements Platform {
         displayMessage("Customizing compilation for Neptus runtime ...");
         ImportCustomizer ic = new ImportCustomizer();
         ic.addStarImports("pt.lsts.imc.dsl");
+        ic.addStaticStars("pt.lsts.neptus.plugins.dolphin.dsl.Instructions");
         for (String msg : IMCDefinition.getInstance().getConcreteMessages()) {
           ic.addImports("pt.lsts.imc." + msg);
         }
-        ic.addStaticStars("pt.lsts.neptus.plugins.dolphin.dsl.Instructions");
         cc.addCompilationCustomizers(ic);
     }
 
