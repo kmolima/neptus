@@ -1,4 +1,4 @@
-package pt.lsts.neptus.plugins.dolphin.dsl
+package pt.lsts.neptus.plugins.dolphin.dsl;
 
 import pt.lsts.imc.IMCMessage
 import pt.lsts.dolphin.runtime.NodeSet
@@ -11,7 +11,6 @@ import pt.lsts.neptus.comm.IMCUtils
 import pt.lsts.imc.PlanDB
 import pt.lsts.imc.PlanDB.OP
 import pt.lsts.imc.PlanDB.TYPE
-
 /**
  * 
  * @author Keila

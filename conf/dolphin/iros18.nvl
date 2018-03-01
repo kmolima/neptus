@@ -34,4 +34,6 @@ UAV:
 		when { consume ready:2 } then imcPlan('rv2')
 		when { consume ready:3 } then imcPlan('rv3')
 	}
+// (5) End
+release UUVs + UAV
 message "Done!"

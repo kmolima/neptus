@@ -1,6 +1,6 @@
-package pt.lsts.neptus.plugins.dolphin.dsl
+package pt.lsts.dolphin.dsl.imc
 import pt.lsts.dolphin.runtime.Position
-import pt.lsts.imc.groovy.dsl.Location
+import pt.lsts.imc.dsl.Location
 
 /**
  * Position & area operators
