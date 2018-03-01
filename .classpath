@@ -258,7 +258,7 @@
 	<classpathentry kind="lib" path="lib/opencv-2.4.11.jar"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
 	<classpathentry kind="lib" path="plugins-dev/dolphin/lib/dolphin-neptus-0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="plugins-dev/dolphin/lib/groovy-all-2.4.11.jar"/>
-	<classpathentry kind="lib" path="plugins-dev/dolphin/lib/imc_plan_dsl.jar"/>
+	<classpathentry kind="lib" path="/home/lsts/workspace/neptus/plugins-dev/dolphin/lib/groovy-all-2.4.11.jar"/>
+	<classpathentry kind="lib" path="plugins-dev/dolphin/lib/imc_plan_dsl-1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
