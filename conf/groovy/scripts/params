@@ -1,6 +1,6 @@
 def plan = new Plan(console)
 plan.with {
-	planName 'b_mae'
+	planName 'plan1'
 	compassCalibration direction:'Vdep'
 	/*rows crossAngle:30.0,alternation:50,
 	      firstCurveRight:true,bearing:20.0,cross_angle:10.0
@@ -15,4 +15,4 @@ plan.with {
 	/*
 	def plan = new Plan(console,plans.get('b_mae'))
      println plan.asPlanType().asXML()*/
-	println 'moka bu mae'
+	println 'done'
